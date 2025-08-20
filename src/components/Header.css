@@ -1,0 +1,38 @@
+/* src/components/Header.css */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  background: white;
+  box-shadow: 0 5px 15px -5px rgba(0,0,0,0.1);
+  padding: 15px 0;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo h2 {
+  font-size: 1.8rem;
+  color: #6366f1;
+  font-weight: 700;
+}
+
+.nav-list {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #0f172a;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: #6366f1;
+}
