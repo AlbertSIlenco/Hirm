@@ -6,7 +6,7 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // Load dark mode preference
+  // Load dark mode from localStorage
   useEffect(() => {
     const savedMode = localStorage.getItem('darkMode') === 'true';
     setIsDarkMode(savedMode);
@@ -15,7 +15,6 @@ function App() {
     }
   }, []);
 
-  // Toggle dark mode
   const toggleDarkMode = () => {
     const newMode = !isDarkMode;
     setIsDarkMode(newMode);
@@ -60,12 +59,10 @@ function App() {
                 alignItems: 'center',
                 justifyContent: 'center'
               }}
-              aria-label="Toggle Dark Mode"
             >
               {isDarkMode ? '☀️' : '🌙'}
             </button>
 
-            {/* Hamburger Icon */}
             <div className="nav-toggle" onClick={toggleMenu}>
               <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
             </div>
@@ -277,7 +274,6 @@ const Contact = () => {
 
   const iconStyle = {
     fontSize: '1.8rem',
-    color: '#6366f1',
     marginBottom: '10px'
   };
 
@@ -297,24 +293,55 @@ const Contact = () => {
           marginTop: '20px'
         }}>
           <div style={contactCardStyle}>
-            <i className="fas fa-envelope" style={iconStyle}></i>
+            <i className="fas fa-envelope" style={{ ...iconStyle, color: '#6366f1' }}></i>
             <h4>Email</h4>
             <p><strong>albertnzubahimana@gmail.com</strong></p>
           </div>
+
           <div style={contactCardStyle}>
-            <i className="fas fa-map-marker-alt" style={iconStyle}></i>
+            <i className="fas fa-map-marker-alt" style={{ ...iconStyle, color: '#6366f1' }}></i>
             <h4>Location</h4>
             <p><strong>Kigali, Rwanda</strong></p>
           </div>
+
           <div style={contactCardStyle}>
-            <i className="fas fa-home" style={iconStyle}></i>
+            <i className="fas fa-home" style={{ ...iconStyle, color: '#6366f1' }}></i>
             <h4>Home Address</h4>
             <p><strong>Nothern, Rwanda</strong></p>
           </div>
+
           <div style={contactCardStyle}>
-            <i className="fas fa-phone" style={iconStyle}></i>
+            <i className="fas fa-phone" style={{ ...iconStyle, color: '#6366f1' }}></i>
             <h4>Phone</h4>
             <p><strong>+250 724 051 404</strong><br/><strong>+250 793 120 674</strong></p>
+          </div>
+
+          {/* WhatsApp */}
+          <div style={contactCardStyle}>
+            <a
+              href="https://wa.me/250724051404"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: 'inherit', textDecoration: 'none' }}
+            >
+              <i className="fab fa-whatsapp" style={{ ...iconStyle, color: '#25D366' }}></i>
+              <h4>WhatsApp</h4>
+              <p><strong>Chat with Me</strong></p>
+            </a>
+          </div>
+
+          {/* Instagram */}
+          <div style={contactCardStyle}>
+            <a
+              href="https://instagram.com/albert_silenco"  // Update with your handle
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: 'inherit', textDecoration: 'none' }}
+            >
+              <i className="fab fa-instagram" style={{ ...iconStyle, color: '#E4405F' }}></i>
+              <h4>Instagram</h4>
+              <p><strong>@albert_silenco</strong></p>
+            </a>
           </div>
         </div>
 
