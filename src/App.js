@@ -6,7 +6,7 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // Check user preference on load
+  // Load dark mode preference
   useEffect(() => {
     const savedMode = localStorage.getItem('darkMode') === 'true';
     setIsDarkMode(savedMode);
@@ -49,10 +49,16 @@ function App() {
               onClick={toggleDarkMode}
               style={{
                 background: 'none',
-                border: 'none',
-                fontSize: '1.5rem',
-                color: isDarkMode ? '#6366f1' : '#0f172a',
-                cursor: 'pointer'
+                border: '2px solid #6366f1',
+                borderRadius: '50%',
+                width: '40px',
+                height: '40px',
+                fontSize: '1.2rem',
+                color: isDarkMode ? '#818cf8' : '#6366f1',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
               }}
               aria-label="Toggle Dark Mode"
             >
@@ -90,8 +96,7 @@ function App() {
   );
 }
 
-// ===== Components (unchanged) =====
-
+// ===== Components =====
 const Hero = () => (
   <section id="home" className="hero">
     <div className="container">
@@ -222,8 +227,6 @@ const Projects = () => {
             <div key={index} className="project-card">
               <h3 className="project-title">{project.title}</h3>
               <p className="project-description">{project.description}</p>
-              
-              {/* Tech Tags */}
               <div style={{
                 display: 'flex',
                 flexWrap: 'wrap',
@@ -236,11 +239,11 @@ const Projects = () => {
                     key={i}
                     style={{
                       background: tag.includes('Laravel') || tag.includes('PHP') 
-                        ? '#f9322c'  // Laravel red
+                        ? '#f9322c' 
                         : tag.includes('React') || tag.includes('JavaScript') 
-                          ? '#61dafb'  // React blue
+                          ? '#61dafb' 
                           : tag.includes('CapCut') || tag.includes('Canva')
-                            ? '#00c4cc'  // Creative teal
+                            ? '#00c4cc' 
                             : '#6366f1',
                       color: 'white',
                       padding: '6px 12px',
@@ -286,7 +289,6 @@ const Contact = () => {
           I'm always open to discussing new opportunities, collaborations, and creative projects.
         </p>
 
-        {/* Contact Info Cards */}
         <div style={{
           display: 'flex',
           flexWrap: 'wrap',
@@ -299,19 +301,16 @@ const Contact = () => {
             <h4>Email</h4>
             <p><strong>albertnzubahimana@gmail.com</strong></p>
           </div>
-
           <div style={contactCardStyle}>
             <i className="fas fa-map-marker-alt" style={iconStyle}></i>
             <h4>Location</h4>
             <p><strong>Kigali, Rwanda</strong></p>
           </div>
-
           <div style={contactCardStyle}>
             <i className="fas fa-home" style={iconStyle}></i>
             <h4>Home Address</h4>
             <p><strong>Nothern, Rwanda</strong></p>
           </div>
-
           <div style={contactCardStyle}>
             <i className="fas fa-phone" style={iconStyle}></i>
             <h4>Phone</h4>
@@ -319,7 +318,6 @@ const Contact = () => {
           </div>
         </div>
 
-        {/* Call to Action Button */}
         <div style={{ textAlign: 'center', marginTop: '50px' }}>
           <a
             href="mailto:albertnzubahimana@gmail.com"
