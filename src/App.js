@@ -1,9 +1,32 @@
 // src/App.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Check user preference on load
+  useEffect(() => {
+    const savedMode = localStorage.getItem('darkMode') === 'true';
+    setIsDarkMode(savedMode);
+    if (savedMode) {
+      document.body.classList.add('dark-mode');
+    }
+  }, []);
+
+  // Toggle dark mode
+  const toggleDarkMode = () => {
+    const newMode = !isDarkMode;
+    setIsDarkMode(newMode);
+    if (newMode) {
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('darkMode', 'true');
+    } else {
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('darkMode', 'false');
+    }
+  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -19,9 +42,27 @@ function App() {
             <h2>Albert</h2>
           </div>
 
-          {/* Hamburger Icon */}
-          <div className="nav-toggle" onClick={toggleMenu}>
-            <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+          {/* Right Side: Dark Mode + Hamburger */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+            {/* Dark Mode Toggle */}
+            <button
+              onClick={toggleDarkMode}
+              style={{
+                background: 'none',
+                border: 'none',
+                fontSize: '1.5rem',
+                color: isDarkMode ? '#6366f1' : '#0f172a',
+                cursor: 'pointer'
+              }}
+              aria-label="Toggle Dark Mode"
+            >
+              {isDarkMode ? '☀️' : '🌙'}
+            </button>
+
+            {/* Hamburger Icon */}
+            <div className="nav-toggle" onClick={toggleMenu}>
+              <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+            </div>
           </div>
 
           {/* Navigation Links */}
@@ -49,7 +90,7 @@ function App() {
   );
 }
 
-// ===== Components =====
+// ===== Components (unchanged) =====
 
 const Hero = () => (
   <section id="home" className="hero">
@@ -222,7 +263,7 @@ const Projects = () => {
 
 const Contact = () => {
   const contactCardStyle = {
-    background: 'white',
+    background: 'var(--card-bg)',
     padding: '25px',
     borderRadius: '12px',
     boxShadow: '0 10px 25px -10px rgba(0,0,0,0.1)',
