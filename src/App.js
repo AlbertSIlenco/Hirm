@@ -77,7 +77,7 @@ function App() {
       </nav>
 
       {/* ===== Main Content ===== */}
-      <main>
+      <main style={{ paddingTop: '80px' }}>
         <Hero />
         <About />
         <Skills />
@@ -95,20 +95,20 @@ const Hero = () => (
   <section id="home" className="hero">
     <div className="container">
       <div className="hero-content">
-        {/* Left Side: Text */}
+        {/* Left: Text */}
         <div className="hero-text">
           <h1>Hello, I'm <span className="text-gradient">Albert</span></h1>
           <h3 className="subtitle">Full-Stack Developer</h3>
           <p className="hero-description">
-            I build fast, clean, and modern web applications using React, Node.js, Laravel, and creative design tools.
+            I build fast, clean, and modern web applications using React, Node.js, Laravel, and creative tools.
           </p>
           <div className="hero-btns">
-            <a href="#projects" className="btn btn-large">View My Work</a>
-            <a href="#contact" className="btn btn-outline btn-large">Contact Me</a>
+            <a href="#projects" className="btn">View My Work</a>
+            <a href="#contact" className="btn btn-outline">Contact Me</a>
           </div>
         </div>
 
-        {/* Right Side: Profile Image */}
+        {/* Right: Profile Image */}
         <div className="hero-image">
           <img
             src="/images/albert-profile.png"
@@ -120,6 +120,7 @@ const Hero = () => (
     </div>
   </section>
 );
+
 const About = () => (
   <section id="about" className="about">
     <div className="container">
@@ -127,20 +128,20 @@ const About = () => (
       <div className="about-content">
         <div className="about-text">
           <p className="about-paragraph">
-            I'm Albert, also known as Silenco Hirm — a passionate full-stack developer with expertise in web development, networking, and digital creativity.
+            Hi, I'm Albert, also known as Silenco Hirm — a passionate full-stack developer with expertise in web development, networking, and digital creativity.
           </p>
           <p className="about-paragraph">
-            I’ve studied Computer Systems & Architecture (CSA) and Electronics, and I’m skilled in photo and video editing using Canva and CapCut.
+            I’ve studied Computer Systems & Architecture (CSA) and Electronics, and I'm skilled in photo and video editing using Canva and CapCut.
           </p>
           <p className="about-paragraph">
-            I enjoy turning ideas into clean, functional, and beautiful digital experiences that solve real problems.
+            I love turning ideas into clean, functional, and beautiful digital experiences.
           </p>
           <a href="#contact" className="btn">Let's Connect</a>
         </div>
         <div className="about-image">
           <img
             src="/images/albert-working.png"
-            alt="Albert working on laptop"
+            alt="Albert working"
             className="about-img"
           />
         </div>
