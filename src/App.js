@@ -31,7 +31,6 @@ function App() {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // Close mobile menu when a link is clicked
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
@@ -95,7 +94,7 @@ function App() {
   );
 }
 
-// ===== Components =====
+// ===== Hero Section - Profile on Right =====
 const Hero = () => (
   <section id="home" className="hero">
     <div className="container">
@@ -155,6 +154,7 @@ const About = () => (
   </section>
 );
 
+// ===== Skills Section - Skills in Box Form =====
 const Skills = () => {
   const skills = [
     'HTML/CSS', 'JavaScript', 'React', 'Node.js', 'Laravel', 'PHP',
