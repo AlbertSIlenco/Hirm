@@ -96,20 +96,25 @@ const Hero = () => (
     <div className="container">
       <div className="hero-content">
         <div className="hero-text">
-          <h1>Hello, I'm <span className="text-gradient">Albert</span></h1>
-          <h3 className="subtitle">Full-Stack Developer</h3>
+          <h1 className="hero-title">
+            Crafting Digital <br />
+            <span className="text-gradient">Experiences</span> That Matter
+          </h1>
+          <h3 className="hero-subtitle">
+              I'm <strong>Albert</strong>, Full-Stack Developer & Creative Technologist
+          </h3>
           <p className="hero-description">
-            I build beautiful, fast, and responsive web apps with React, Node.js, Laravel, and modern tools.
+            From clean code to compelling visuals, I build full-stack web apps that are fast, secure, and designed to impress.
           </p>
           <div className="hero-btns">
-            <a href="#projects" className="btn btn-large">View My Work</a>
-            <a href="#contact" className="btn btn-outline btn-large">Contact Me</a>
+            <a href="#projects" className="btn btn-large">See My Work</a>
+            <a href="#contact" className="btn btn-outline btn-large">Let’s Talk</a>
           </div>
         </div>
         <div className="hero-image">
           <img
             src="/images/albert-profile.png"
-            alt="Albert"
+            alt="Albert - Full Stack Developer"
             className="profile-img"
           />
         </div>
@@ -117,7 +122,6 @@ const Hero = () => (
     </div>
   </section>
 );
-
 const About = () => (
   <section id="about" className="about">
     <div className="container">
