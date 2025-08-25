@@ -90,7 +90,7 @@ function App() {
   );
 }
 
-// ===== Components =====
+// ===== Hero Section - Updated Text & Fixed Dark Mode =====
 const Hero = () => (
   <section id="home" className="hero">
     <div className="container">
