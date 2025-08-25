@@ -36,14 +36,11 @@ function App() {
       {/* ===== Navbar ===== */}
       <nav className="navbar">
         <div className="nav-container">
-          {/* Logo */}
           <div className="nav-logo">
             <h2>Albert</h2>
           </div>
 
-          {/* Right Side: Dark Mode + Hamburger */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-            {/* Dark Mode Toggle */}
             <button
               onClick={toggleDarkMode}
               style={{
@@ -68,7 +65,6 @@ function App() {
             </div>
           </div>
 
-          {/* Navigation Links */}
           <ul className={`nav-menu ${isMenuOpen ? 'nav-active' : ''}`}>
             <li><a href="#home" onClick={() => setIsMenuOpen(false)} className="nav-link">Home</a></li>
             <li><a href="#about" onClick={() => setIsMenuOpen(false)} className="nav-link">About</a></li>
@@ -79,7 +75,6 @@ function App() {
         </div>
       </nav>
 
-      {/* ===== Main Content ===== */}
       <main>
         <Hero />
         <About />
@@ -316,7 +311,6 @@ const Contact = () => {
             <p><strong>+250 724 051 404</strong><br/><strong>+250 793 120 674</strong></p>
           </div>
 
-          {/* WhatsApp */}
           <div style={contactCardStyle}>
             <a
               href="https://wa.me/250724051404"
@@ -330,10 +324,9 @@ const Contact = () => {
             </a>
           </div>
 
-          {/* Instagram */}
           <div style={contactCardStyle}>
             <a
-              href="https://instagram.com/albert_silenco"  // Update with your handle
+              href="https://instagram.com/albert_silenco"
               target="_blank"
               rel="noopener noreferrer"
               style={{ color: 'inherit', textDecoration: 'none' }}
