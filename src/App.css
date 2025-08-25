@@ -16,19 +16,17 @@
 }
 
 body.dark-mode {
-  --card-bg: #1e293b;
+  --card-bg: #334155;
   --light: #0f172a;
   --dark: #f8fafc;
   --gray: #e2e8f0;
-  --primary: #818cf8;
-  --secondary: #f0abfc;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  transition: background-color 0.4s ease, color 0.4s ease, box-shadow 0.3s ease;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 body {
@@ -59,7 +57,30 @@ section {
   padding: 100px 0;
 }
 
-/* ===== Navbar ===== */
+.section-title {
+  font-size: 2.8rem;
+  text-align: center;
+  color: var(--dark);
+  margin-bottom: 20px;
+}
+
+body.dark-mode .section-title {
+  color: #f8fafc;
+}
+
+.section-subtitle {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 60px;
+  color: var(--gray);
+  font-size: 1.1rem;
+}
+
+body.dark-mode .section-subtitle {
+  color: #e2e8f0;
+}
+
+/* ===== Navbar Styles ===== */
 .navbar {
   position: fixed;
   top: 0;
@@ -68,6 +89,7 @@ section {
   z-index: 1000;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   padding: 15px 0;
+  /* Remove any backdrop-filter that causes blur/shading */
 }
 
 body.dark-mode .navbar {
@@ -88,35 +110,25 @@ body.dark-mode .navbar {
   color: var(--primary);
   font-size: 1.8rem;
   margin: 0;
+  /* Remove any text-shadow or filter */
+  text-shadow: none;
+  filter: none;
   font-weight: 700;
 }
 
+/* ✅ CRITICAL FIX: Ensure "Albert" is bright white with no shading */
 body.dark-mode .nav-logo h2 {
-  color: white;
+  color: white !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); /* Subtle glow, not shading */
+  filter: none;
+  font-weight: 700;
 }
 
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.dark-mode-toggle {
-  background: none;
-  border: 2px solid var(--primary);
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 1.2rem;
-  color: var(--primary);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-body.dark-mode .dark-mode-toggle {
-  color: #818cf8;
-  border-color: #818cf8;
-}
+/* Remove any backdrop-filter that causes blur */
+/* If you previously added backdrop-filter: blur(), remove it */
+/* Example of what NOT to have:
+   backdrop-filter: blur(10px); 
+*/
 
 .nav-toggle {
   font-size: 1.5rem;
@@ -184,136 +196,114 @@ body.dark-mode .nav-link:hover {
   }
 }
 
-/* ===== Hero Section ===== */
-.hero-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 50px;
-  flex-wrap: wrap;
+/* Buttons */
+.btn {
+  display: inline-block;
+  background: var(--primary);
+  color: white;
+  padding: 14px 30px;
+  border: none;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
 }
 
-.hero-text h1 {
-  font-size: 3.5rem;
-  color: var(--dark);
-  margin: 10px 0;
-  font-weight: 800;
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
 }
 
-body.dark-mode .hero-text h1 {
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+}
+
+.btn-outline:hover {
+  background: var(--primary);
   color: white;
 }
 
-.text-gradient {
-  background: linear-gradient(90deg, #6366f1, #ec4899);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-}
-
-body.dark-mode .text-gradient {
-  background: linear-gradient(90deg, #818cf8, #f0abfc);
-}
-
-.hero-text .subtitle {
-  font-size: 1.8rem;
-  color: #6366f1;
-  margin: 15px 0;
-  font-weight: 500;
-}
-
-body.dark-mode .hero-text .subtitle {
+body.dark-mode .btn-outline {
+  border-color: #818cf8;
   color: #818cf8;
 }
 
-.hero-text .hero-description {
-  color: var(--gray);
-  font-size: 1.1rem;
-  line-height: 1.7;
-  margin: 20px 0;
+body.dark-mode .btn-outline:hover {
+  background: #818cf8;
+  color: white;
 }
 
-body.dark-mode .hero-text .hero-description {
-  color: #e2e8f0;
+/* Gradient Text */
+.text-gradient {
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline;
 }
 
-.hero-btns {
-  display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
-  margin-top: 20px;
+body.dark-mode .text-gradient {
+  background: linear-gradient(90deg, #818cf8, #a78bfa);
 }
 
-.profile-img {
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  border: 5px solid white;
-  box-shadow: var(--shadow-lg);
-  object-fit: cover;
-}
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--primary-dark); }
 
-/* ===== Components ===== */
-.about-content {
-  display: flex;
-  gap: 50px;
-  align-items: center;
-  flex-wrap: wrap;
-}
+body.dark-mode ::-webkit-scrollbar-track { background: #1e293b; }
+body.dark-mode ::-webkit-scrollbar-thumb { background: #6366f1; }
 
-.about-paragraph {
-  color: var(--gray);
-  line-height: 1.7;
-  margin-bottom: 20px;
-}
+/* Components */
+.hero-content { display: flex; justify-content: space-between; align-items: center; gap: 50px; flex-wrap: wrap; }
+.hero-text { flex: 1; max-width: 600px; }
+.hero-text h1 { font-size: 3.5rem; color: var(--dark); margin: 10px 0; }
+body.dark-mode .hero-text h1 { color: #f8fafc; }
+.hero-text .subtitle { font-size: 1.8rem; color: var(--primary); margin: 15px 0; font-weight: 500; }
+body.dark-mode .hero-text .subtitle { color: #818cf8; }
+.hero-text .hero-description { color: var(--gray); font-size: 1.1rem; line-height: 1.7; margin: 20px 0; }
+body.dark-mode .hero-text .hero-description { color: #e2e8f0; }
+.hero-btns { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 20px; }
+.profile-img { width: 300px; height: 300px; border-radius: 50%; border: 5px solid white; box-shadow: var(--shadow-lg); object-fit: cover; }
 
-body.dark-mode .about-paragraph {
-  color: #e2e8f0;
-}
+.about-content { display: flex; gap: 50px; align-items: center; flex-wrap: wrap; }
+.about-text { flex: 1; }
+.about-paragraph { color: var(--gray); line-height: 1.7; margin-bottom: 20px; }
+body.dark-mode .about-paragraph { color: #e2e8f0; }
+.about-img { width: 100%; border-radius: var(--radius); box-shadow: var(--shadow-lg); }
 
-.skill-tag {
-  background: #f1f5f9;
-  color: var(--dark);
-  padding: 12px 24px;
-  border-radius: 30px;
-  font-size: 0.95rem;
-  border: 1px solid #e2e8f0;
-  font-weight: 500;
+.skills-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 40px; }
+.skill-tag { 
+  background: #f1f5f9; 
+  color: var(--dark); 
+  padding: 12px 24px; 
+  border-radius: 30px; 
+  font-size: 0.95rem; 
+  border: 1px solid #e2e8f0; 
+  font-weight: 500; 
   transition: var(--transition);
 }
-
-body.dark-mode .skill-tag {
-  background: #334155;
-  color: #e2e8f0;
+body.dark-mode .skill-tag { 
+  background: #475569 !important; 
+  color: #e2e8f0; 
+}
+.skill-tag:hover { 
+  background: var(--primary); 
+  color: white; 
+  transform: translateY(-3px); 
 }
 
-.skill-tag:hover {
-  background: var(--primary);
-  color: white;
-  transform: translateY(-3px);
-}
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+.project-card { background: var(--card-bg); padding: 30px; border-radius: var(--radius); box-shadow: var(--shadow); text-align: center; transition: var(--transition); }
+.project-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); }
+.project-title { font-size: 1.5rem; color: var(--dark); margin: 10px 0; }
+body.dark-mode .project-title { color: #f8fafc; }
+.project-description { color: var(--gray); font-size: 1rem; }
+body.dark-mode .project-description { color: #e2e8f0; }
 
-.project-card {
-  background: var(--card-bg);
-  padding: 30px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  text-align: center;
-  transition: var(--transition);
-}
-
-body.dark-mode .project-card {
-  box-shadow: 0 10px 25px -10px rgba(0,0,0,0.4);
-}
-
-.footer {
-  background: var(--dark);
-  color: white;
-  text-align: center;
-  padding: 40px 0;
-}
-
-body.dark-mode .footer {
-  background: #0f172a;
-}
+.footer { background: var(--dark); color: white; text-align: center; padding: 40px 0; }
+.footer p { margin: 10px 0; font-size: 0.9rem; color: #ccc; }
+body.dark-mode .footer { background: #0f172a; border-top: 1px solid #334155; }
