@@ -40,38 +40,38 @@ function App() {
             <h2>Albert</h2>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-            {/* Dark Mode Toggle */}
-            <button
-              onClick={toggleDarkMode}
-              style={{
-                background: 'none',
-                border: '2px solid #6366f1',
-                borderRadius: '50%',
-                width: '40px',
-                height: '40px',
-                fontSize: '1.2rem',
-                color: isDarkMode ? '#818cf8' : '#6366f1',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
-            >
-              {isDarkMode ? '☀️' : '🌙'}
-            </button>
+          {/* Dark Mode Toggle */}
+          <button
+            onClick={toggleDarkMode}
+            style={{
+              background: 'none',
+              border: '2px solid #6366f1',
+              borderRadius: '50%',
+              width: '40px',
+              height: '40px',
+              fontSize: '1.2rem',
+              color: isDarkMode ? '#818cf8' : '#6366f1',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            {isDarkMode ? '🌙' : '☀️'}
+          </button>
 
-            <div className="nav-toggle" onClick={toggleMenu}>
-              <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
-            </div>
+          {/* Mobile Menu Toggle */}
+          <div className="nav-toggle" onClick={toggleMenu}>
+            <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
           </div>
 
+          {/* Nav Links */}
           <ul className={`nav-menu ${isMenuOpen ? 'nav-active' : ''}`}>
-            <li><a href="#home" onClick={() => setIsMenuOpen(false)} className="nav-link">Home</a></li>
-            <li><a href="#about" onClick={() => setIsMenuOpen(false)} className="nav-link">About</a></li>
-            <li><a href="#skills" onClick={() => setIsMenuOpen(false)} className="nav-link">Skills</a></li>
-            <li><a href="#projects" onClick={() => setIsMenuOpen(false)} className="nav-link">Projects</a></li>
-            <li><a href="#contact" onClick={() => setIsMenuOpen(false)} className="nav-link">Contact</a></li>
+            <li><a href="#home" onClick={toggleMenu} className="nav-link">Home</a></li>
+            <li><a href="#about" onClick={toggleMenu} className="nav-link">About</a></li>
+            <li><a href="#skills" onClick={toggleMenu} className="nav-link">Skills</a></li>
+            <li><a href="#projects" onClick={toggleMenu} className="nav-link">Projects</a></li>
+            <li><a href="#contact" onClick={toggleMenu} className="nav-link">Contact</a></li>
           </ul>
         </div>
       </nav>
@@ -90,7 +90,7 @@ function App() {
   );
 }
 
-// ===== Hero Section - Updated Text & Fixed Dark Mode =====
+// ===== Components =====
 const Hero = () => (
   <section id="home" className="hero">
     <div className="container">
