@@ -94,7 +94,7 @@ function App() {
   );
 }
 
-// ===== Hero Section - Profile on Right =====
+// ===== Hero Section - Profile Picture on Right =====
 const Hero = () => (
   <section id="home" className="hero">
     <div className="container">
@@ -125,6 +125,7 @@ const Hero = () => (
   </section>
 );
 
+// ===== About Section - Restored =====
 const About = () => (
   <section id="about" className="about">
     <div className="container">
@@ -175,6 +176,7 @@ const Skills = () => {
   );
 };
 
+// ===== Projects Section - Tags in Box Form =====
 const Projects = () => {
   const projects = [
     {
@@ -227,33 +229,9 @@ const Projects = () => {
             <div key={index} className="project-card">
               <h3 className="project-title">{project.title}</h3>
               <p className="project-description">{project.description}</p>
-              <div style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: '8px',
-                marginTop: '15px',
-                justifyContent: 'center'
-              }}>
+              <div className="project-tags">
                 {project.tags.map((tag, i) => (
-                  <span
-                    key={i}
-                    style={{
-                      background: tag.includes('Laravel') || tag.includes('PHP') 
-                        ? '#f9322c' 
-                        : tag.includes('React') || tag.includes('JavaScript') 
-                          ? '#61dafb' 
-                          : tag.includes('CapCut') || tag.includes('Canva')
-                            ? '#00c4cc' 
-                            : '#6366f1',
-                      color: 'white',
-                      padding: '6px 12px',
-                      borderRadius: '20px',
-                      fontSize: '0.8rem',
-                      fontWeight: '500'
-                    }}
-                  >
-                    {tag}
-                  </span>
+                  <span key={i} className="tag">{tag}</span>
                 ))}
               </div>
             </div>
@@ -264,6 +242,7 @@ const Projects = () => {
   );
 };
 
+// ===== Contact Section =====
 const Contact = () => {
   const contactCardStyle = {
     background: 'var(--card-bg)',
@@ -361,6 +340,7 @@ const Contact = () => {
   );
 };
 
+// ===== Footer =====
 const Footer = () => (
   <footer className="footer">
     <div className="container">
