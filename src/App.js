@@ -77,7 +77,7 @@ function App() {
       </nav>
 
       {/* ===== Main Content ===== */}
-      <main style={{ paddingTop: '80px' }}>
+      <main>
         <Hero />
         <About />
         <Skills />
@@ -174,37 +174,44 @@ const Projects = () => {
     {
       title: "Personal Portfolio Website",
       description: "A responsive portfolio built with React and GSAP for smooth animations and modern design.",
-      tags: ["React", "GSAP", "CSS3", "JavaScript"]
+      tags: ["React", "GSAP", "CSS3", "JavaScript"],
+      color: "#61dafb"
     },
     {
       title: "Student Management System",
       description: "A full-featured web app built with Laravel for managing student records, grades, and attendance with secure login and admin dashboard.",
-      tags: ["Laravel", "PHP", "MySQL", "Bootstrap", "Admin Panel"]
+      tags: ["Laravel", "PHP", "MySQL", "Bootstrap", "Admin Panel"],
+      color: "#f9322c"
     },
     {
       title: "Network Setup for Small Business",
       description: "Designed and implemented a secure LAN network for a 15-user office, including router configuration and IP management.",
-      tags: ["Networking", "CSA", "Router Setup", "LAN"]
+      tags: ["Networking", "CSA", "Router Setup", "LAN"],
+      color: "#10b981"
     },
     {
       title: "Promotional Video Edits",
       description: "Created engaging promotional videos for local businesses using CapCut and Canva with motion graphics and sound design.",
-      tags: ["CapCut", "Canva", "Video Editing", "Motion Graphics"]
+      tags: ["CapCut", "Canva", "Video Editing", "Motion Graphics"],
+      color: "#00c4cc"
     },
     {
       title: "Digital Photo Editing Service",
       description: "Provided professional photo retouching, color correction, and social media content design for clients.",
-      tags: ["Photo Editing", "Canva", "Color Grading", "Social Media"]
+      tags: ["Photo Editing", "Canva", "Color Grading", "Social Media"],
+      color: "#8b5cf6"
     },
     {
       title: "IoT Electronics Project",
       description: "Built a temperature monitoring system using sensors and a Raspberry Pi for real-time data display.",
-      tags: ["Electronics", "CSA", "Raspberry Pi", "Sensor Integration"]
+      tags: ["Electronics", "CSA", "Raspberry Pi", "Sensor Integration"],
+      color: "#f59e0b"
     },
     {
       title: "Website for Local Cafe",
       description: "Designed and developed a responsive website with menu display and contact form using HTML, CSS, and JavaScript.",
-      tags: ["HTML/CSS", "JavaScript", "Responsive Design", "UI"]
+      tags: ["HTML/CSS", "JavaScript", "Responsive Design", "UI"],
+      color: "#ef4444"
     }
   ];
 
@@ -219,11 +226,18 @@ const Projects = () => {
         <div className="projects-grid">
           {projects.map((project, index) => (
             <div key={index} className="project-card">
-              <h3 className="project-title">{project.title}</h3>
+              <div className="project-header" style={{ background: project.color }}>
+                <h3 className="project-title">{project.title}</h3>
+              </div>
               <p className="project-description">{project.description}</p>
               <div className="project-tags">
                 {project.tags.map((tag, i) => (
-                  <span key={i} className="tag">{tag}</span>
+                  <span key={i} className="tag" style={{
+                    background: project.color,
+                    color: 'white'
+                  }}>
+                    {tag}
+                  </span>
                 ))}
               </div>
             </div>
