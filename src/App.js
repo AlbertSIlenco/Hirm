@@ -104,8 +104,8 @@ const Hero = () => (
             I build fast, responsive, and scalable web apps with React, Node.js, Laravel, and modern design tools.
           </p>
           <div className="hero-btns">
-            <a href="#projects" className="btn">View My Work</a>
-            <a href="#contact" className="btn btn-outline">Contact Me</a>
+            <a href="#projects" className="btn btn-large">View My Work</a>
+            <a href="#contact" className="btn btn-outline btn-large">Contact Me</a>
           </div>
         </div>
         <div className="hero-image">
@@ -127,17 +127,15 @@ const About = () => (
       <div className="about-content">
         <div className="about-text">
           <p className="about-paragraph">
-            Hi, I'm Albert or call me Silenco Hirm, a passionate developer with expertise in full-stack development, 
-            networking, and creative technologies.
+            I'm Albert, a passionate full-stack developer with a strong foundation in Computer Systems & Architecture (CSA), Electronics, and creative technologies.
           </p>
           <p className="about-paragraph">
-            I’ve studied Computer Systems & Architecture (CSA), Electronics, and I'm skilled in 
-            photo & video editing using Canva and CapCut.
+            I specialize in building modern web applications with React and Node.js, designing secure networks, and creating engaging digital content using Canva and CapCut.
           </p>
           <p className="about-paragraph">
-            I love turning ideas into functional, beautiful digital experiences.
+            My goal is to turn ideas into functional, beautiful, and user-friendly digital experiences.
           </p>
-          <a href="#contact" className="btn">Let's Connect</a>
+          <a href="#contact" className="btn btn-large">Let's Connect</a>
         </div>
         <div className="about-image">
           <img
@@ -223,31 +221,9 @@ const Projects = () => {
             <div key={index} className="project-card">
               <h3 className="project-title">{project.title}</h3>
               <p className="project-description">{project.description}</p>
-              <div style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: '8px',
-                marginTop: '15px',
-                justifyContent: 'center'
-              }}>
+              <div className="project-tags">
                 {project.tags.map((tag, i) => (
-                  <span
-                    key={i}
-                    style={{
-                      background: tag.includes('Laravel') || tag.includes('PHP') 
-                        ? '#f9322c' 
-                        : tag.includes('React') || tag.includes('JavaScript') 
-                          ? '#61dafb' 
-                          : tag.includes('CapCut') || tag.includes('Canva')
-                            ? '#00c4cc' 
-                            : '#6366f1',
-                      color: 'white',
-                      padding: '6px 12px',
-                      borderRadius: '20px',
-                      fontSize: '0.8rem',
-                      fontWeight: '500'
-                    }}
-                  >
+                  <span key={i} className="tag">
                     {tag}
                   </span>
                 ))}
@@ -345,8 +321,8 @@ const Contact = () => {
         <div style={{ textAlign: 'center', marginTop: '50px' }}>
           <a
             href="mailto:albertnzubahimana@gmail.com"
-            className="btn"
-            style={{ padding: '16px 40px', fontSize: '1.1rem' }}
+            className="btn btn-large"
+            style={{ padding: '16px 40px', fontSize: '1.2rem' }}
           >
             Send Email
           </a>
