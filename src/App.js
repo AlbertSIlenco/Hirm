@@ -67,17 +67,17 @@ function App() {
           </div>
 
           <ul className={`nav-menu ${isMenuOpen ? 'nav-active' : ''}`}>
-            <li><a href="#home" onClick={toggleMenu} className="nav-link">Home</a></li>
-            <li><a href="#about" onClick={toggleMenu} className="nav-link">About</a></li>
-            <li><a href="#skills" onClick={toggleMenu} className="nav-link">Skills</a></li>
-            <li><a href="#projects" onClick={toggleMenu} className="nav-link">Projects</a></li>
-            <li><a href="#contact" onClick={toggleMenu} className="nav-link">Contact</a></li>
+            <li><a href="#home" onClick={() => setIsMenuOpen(false)} className="nav-link">Home</a></li>
+            <li><a href="#about" onClick={() => setIsMenuOpen(false)} className="nav-link">About</a></li>
+            <li><a href="#skills" onClick={() => setIsMenuOpen(false)} className="nav-link">Skills</a></li>
+            <li><a href="#projects" onClick={() => setIsMenuOpen(false)} className="nav-link">Projects</a></li>
+            <li><a href="#contact" onClick={() => setIsMenuOpen(false)} className="nav-link">Contact</a></li>
           </ul>
         </div>
       </nav>
 
       {/* ===== Main Content ===== */}
-      <main>
+      <main style={{ paddingTop: '80px' }}>
         <Hero />
         <About />
         <Skills />
@@ -102,8 +102,8 @@ const Hero = () => (
             I build beautiful, fast, and responsive web apps with React, Node.js, Laravel, and modern tools.
           </p>
           <div className="hero-btns">
-            <a href="#projects" className="btn">View My Work</a>
-            <a href="#contact" className="btn btn-outline">Contact Me</a>
+            <a href="#projects" className="btn btn-large">View My Work</a>
+            <a href="#contact" className="btn btn-outline btn-large">Contact Me</a>
           </div>
         </div>
         <div className="hero-image">
@@ -135,7 +135,7 @@ const About = () => (
           <p className="about-paragraph">
             I love turning ideas into functional, beautiful digital experiences.
           </p>
-          <a href="#contact" className="btn">Let's Connect</a>
+          <a href="#contact" className="btn btn-large">Let's Connect</a>
         </div>
         <div className="about-image">
           <img
@@ -221,33 +221,9 @@ const Projects = () => {
             <div key={index} className="project-card">
               <h3 className="project-title">{project.title}</h3>
               <p className="project-description">{project.description}</p>
-              <div style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: '8px',
-                marginTop: '15px',
-                justifyContent: 'center'
-              }}>
+              <div className="project-tags">
                 {project.tags.map((tag, i) => (
-                  <span
-                    key={i}
-                    style={{
-                      background: tag.includes('Laravel') || tag.includes('PHP') 
-                        ? '#f9322c' 
-                        : tag.includes('React') || tag.includes('JavaScript') 
-                          ? '#61dafb' 
-                          : tag.includes('CapCut') || tag.includes('Canva')
-                            ? '#00c4cc' 
-                            : '#6366f1',
-                      color: 'white',
-                      padding: '6px 12px',
-                      borderRadius: '20px',
-                      fontSize: '0.8rem',
-                      fontWeight: '500'
-                    }}
-                  >
-                    {tag}
-                  </span>
+                  <span key={i} className="tag">{tag}</span>
                 ))}
               </div>
             </div>
@@ -344,8 +320,8 @@ const Contact = () => {
         <div style={{ textAlign: 'center', marginTop: '50px' }}>
           <a
             href="mailto:albertnzubahimana@gmail.com"
-            className="btn"
-            style={{ padding: '16px 40px', fontSize: '1.1rem' }}
+            className="btn btn-large"
+            style={{ padding: '16px 40px', fontSize: '1.2rem' }}
           >
             Send Email
           </a>
