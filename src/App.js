@@ -36,35 +36,29 @@ function App() {
       {/* ===== Navbar ===== */}
       <nav className="navbar">
         <div className="nav-container">
+          {/* Logo */}
           <div className="nav-logo">
             <h2>Albert</h2>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+          {/* Right Side: Dark Mode + Hamburger */}
+          <div className="nav-right">
+            {/* Dark Mode Toggle */}
             <button
               onClick={toggleDarkMode}
-              style={{
-                background: 'none',
-                border: '2px solid #6366f1',
-                borderRadius: '50%',
-                width: '40px',
-                height: '40px',
-                fontSize: '1.2rem',
-                color: isDarkMode ? '#818cf8' : '#6366f1',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
+              className="dark-mode-toggle"
+              aria-label="Toggle Dark Mode"
             >
               {isDarkMode ? '☀️' : '🌙'}
             </button>
 
+            {/* Hamburger Icon */}
             <div className="nav-toggle" onClick={toggleMenu}>
               <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
             </div>
           </div>
 
+          {/* Navigation Links */}
           <ul className={`nav-menu ${isMenuOpen ? 'nav-active' : ''}`}>
             <li><a href="#home" onClick={() => setIsMenuOpen(false)} className="nav-link">Home</a></li>
             <li><a href="#about" onClick={() => setIsMenuOpen(false)} className="nav-link">About</a></li>
@@ -75,7 +69,8 @@ function App() {
         </div>
       </nav>
 
-      <main>
+      {/* ===== Main Content (offset for fixed navbar) ===== */}
+      <main style={{ paddingTop: '80px' }}>
         <Hero />
         <About />
         <Skills />
