@@ -77,13 +77,11 @@ function App() {
       </nav>
 
       {/* ===== Main Content ===== */}
-      <main>
+      <main style={{ paddingTop: '80px' }}>
         <Hero />
         <About />
         <Skills />
         <Projects />
-        <SkillCategories />
-        <FunFacts />
         <Contact />
 
         {/* ===== Scroll to Top Button ===== */}
@@ -200,14 +198,37 @@ const Projects = () => {
     {
       title: "Personal Portfolio Website",
       description: "A responsive portfolio built with React and GSAP for smooth animations and modern design.",
-      tags: ["React", "GSAP", "CSS3", "JavaScript"],
-      demo: "https://yourportfolio.com"
+      tags: ["React", "GSAP", "CSS3", "JavaScript"]
     },
     {
       title: "Student Management System",
       description: "A full-featured web app built with Laravel for managing student records, grades, and attendance with secure login and admin dashboard.",
-      tags: ["Laravel", "PHP", "MySQL", "Bootstrap", "Admin Panel"],
-      demo: "https://laravel-demo.com"
+      tags: ["Laravel", "PHP", "MySQL", "Bootstrap", "Admin Panel"]
+    },
+    {
+      title: "Network Setup for Small Business",
+      description: "Designed and implemented a secure LAN network for a 15-user office, including router configuration and IP management.",
+      tags: ["Networking", "CSA", "Router Setup", "LAN"]
+    },
+    {
+      title: "Promotional Video Edits",
+      description: "Created engaging promotional videos for local businesses using CapCut and Canva with motion graphics and sound design.",
+      tags: ["CapCut", "Canva", "Video Editing", "Motion Graphics"]
+    },
+    {
+      title: "Digital Photo Editing Service",
+      description: "Provided professional photo retouching, color correction, and social media content design for clients.",
+      tags: ["Photo Editing", "Canva", "Color Grading", "Social Media"]
+    },
+    {
+      title: "IoT Electronics Project",
+      description: "Built a temperature monitoring system using sensors and a Raspberry Pi for real-time data display.",
+      tags: ["Electronics", "CSA", "Raspberry Pi", "Sensor Integration"]
+    },
+    {
+      title: "Website for Local Cafe",
+      description: "Designed and developed a responsive website with menu display and contact form using HTML, CSS, and JavaScript.",
+      tags: ["HTML/CSS", "JavaScript", "Responsive Design", "UI"]
     }
   ];
 
@@ -229,20 +250,6 @@ const Projects = () => {
                   <span key={i} className="tag">{tag}</span>
                 ))}
               </div>
-              <a
-                href={project.demo}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  fontSize: '0.8rem',
-                  color: '#6366f1',
-                  textDecoration: 'underline',
-                  marginTop: '8px',
-                  display: 'block'
-                }}
-              >
-                🔗 Live Demo
-              </a>
             </div>
           ))}
         </div>
@@ -250,74 +257,6 @@ const Projects = () => {
     </section>
   );
 };
-
-const SkillCategories = () => (
-  <section className="skill-categories">
-    <div className="container">
-      <h2 className="section-title">Skills by Category</h2>
-      <div style={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        gap: '30px',
-        marginTop: '20px'
-      }}>
-        {[
-          { title: 'Web Dev', items: ['HTML/CSS', 'JavaScript', 'React', 'Node.js'] },
-          { title: 'Backend', items: ['Laravel', 'PHP', 'MySQL'] },
-          { title: 'Creative', items: ['Canva', 'CapCut', 'Photo & Video Editing'] },
-          { title: 'Systems', items: ['CSA', 'Networking', 'Electronics'] }
-        ].map((cat, i) => (
-          <div key={i} style={{
-            background: 'var(--card-bg)',
-            padding: '20px',
-            borderRadius: '12px',
-            boxShadow: 'var(--shadow)',
-            width: '200px'
-          }}>
-            <h3 style={{ color: '#6366f1', marginBottom: '10px' }}>{cat.title}</h3>
-            <ul style={{ textAlign: 'left', color: 'var(--gray)' }}>
-              {cat.items.map((item, j) => (
-                <li key={j}>{item}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-);
-
-const FunFacts = () => (
-  <section className="fun-facts">
-    <div className="container">
-      <h2 className="section-title">A Bit About Me</h2>
-      <p className="section-subtitle">
-        When I'm not coding, I enjoy creating digital art, editing videos, and learning new tech.
-      </p>
-      <div style={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        gap: '20px',
-        marginTop: '30px'
-      }}>
-        <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: '2rem', marginBottom: '10px' }}>🎨</div>
-          <p><strong>Digital Art</strong></p>
-        </div>
-        <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: '2rem', marginBottom: '10px' }}>🎵</div>
-          <p><strong>Video Editing</strong></p>
-        </div>
-        <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: '2rem', marginBottom: '10px' }}>📚</div>
-          <p><strong>Tech Learning</strong></p>
-        </div>
-      </div>
-    </div>
-  </section>
-);
 
 const Contact = () => {
   const contactCardStyle = {
