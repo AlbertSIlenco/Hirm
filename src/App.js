@@ -82,7 +82,33 @@ function App() {
         <About />
         <Skills />
         <Projects />
+        <SkillCategories />
+        <FunFacts />
         <Contact />
+
+        {/* ===== Scroll to Top Button ===== */}
+        <div
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          style={{
+            position: 'fixed',
+            bottom: '30px',
+            right: '30px',
+            background: '#6366f1',
+            color: 'white',
+            width: '50px',
+            height: '50px',
+            borderRadius: '50%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '1.5rem',
+            boxShadow: '0 5px 15px rgba(0,0,0,0.2)',
+            cursor: 'pointer',
+            zIndex: 100
+          }}
+        >
+          ↑
+        </div>
       </main>
 
       <Footer />
@@ -174,37 +200,14 @@ const Projects = () => {
     {
       title: "Personal Portfolio Website",
       description: "A responsive portfolio built with React and GSAP for smooth animations and modern design.",
-      tags: ["React", "GSAP", "CSS3", "JavaScript"]
+      tags: ["React", "GSAP", "CSS3", "JavaScript"],
+      demo: "https://yourportfolio.com"
     },
     {
       title: "Student Management System",
       description: "A full-featured web app built with Laravel for managing student records, grades, and attendance with secure login and admin dashboard.",
-      tags: ["Laravel", "PHP", "MySQL", "Bootstrap", "Admin Panel"]
-    },
-    {
-      title: "Network Setup for Small Business",
-      description: "Designed and implemented a secure LAN network for a 15-user office, including router configuration and IP management.",
-      tags: ["Networking", "CSA", "Router Setup", "LAN"]
-    },
-    {
-      title: "Promotional Video Edits",
-      description: "Created engaging promotional videos for local businesses using CapCut and Canva with motion graphics and sound design.",
-      tags: ["CapCut", "Canva", "Video Editing", "Motion Graphics"]
-    },
-    {
-      title: "Digital Photo Editing Service",
-      description: "Provided professional photo retouching, color correction, and social media content design for clients.",
-      tags: ["Photo Editing", "Canva", "Color Grading", "Social Media"]
-    },
-    {
-      title: "IoT Electronics Project",
-      description: "Built a temperature monitoring system using sensors and a Raspberry Pi for real-time data display.",
-      tags: ["Electronics", "CSA", "Raspberry Pi", "Sensor Integration"]
-    },
-    {
-      title: "Website for Local Cafe",
-      description: "Designed and developed a responsive website with menu display and contact form using HTML, CSS, and JavaScript.",
-      tags: ["HTML/CSS", "JavaScript", "Responsive Design", "UI"]
+      tags: ["Laravel", "PHP", "MySQL", "Bootstrap", "Admin Panel"],
+      demo: "https://laravel-demo.com"
     }
   ];
 
@@ -223,11 +226,23 @@ const Projects = () => {
               <p className="project-description">{project.description}</p>
               <div className="project-tags">
                 {project.tags.map((tag, i) => (
-                  <span key={i} className="tag">
-                    {tag}
-                  </span>
+                  <span key={i} className="tag">{tag}</span>
                 ))}
               </div>
+              <a
+                href={project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  fontSize: '0.8rem',
+                  color: '#6366f1',
+                  textDecoration: 'underline',
+                  marginTop: '8px',
+                  display: 'block'
+                }}
+              >
+                🔗 Live Demo
+              </a>
             </div>
           ))}
         </div>
@@ -235,6 +250,74 @@ const Projects = () => {
     </section>
   );
 };
+
+const SkillCategories = () => (
+  <section className="skill-categories">
+    <div className="container">
+      <h2 className="section-title">Skills by Category</h2>
+      <div style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        gap: '30px',
+        marginTop: '20px'
+      }}>
+        {[
+          { title: 'Web Dev', items: ['HTML/CSS', 'JavaScript', 'React', 'Node.js'] },
+          { title: 'Backend', items: ['Laravel', 'PHP', 'MySQL'] },
+          { title: 'Creative', items: ['Canva', 'CapCut', 'Photo & Video Editing'] },
+          { title: 'Systems', items: ['CSA', 'Networking', 'Electronics'] }
+        ].map((cat, i) => (
+          <div key={i} style={{
+            background: 'var(--card-bg)',
+            padding: '20px',
+            borderRadius: '12px',
+            boxShadow: 'var(--shadow)',
+            width: '200px'
+          }}>
+            <h3 style={{ color: '#6366f1', marginBottom: '10px' }}>{cat.title}</h3>
+            <ul style={{ textAlign: 'left', color: 'var(--gray)' }}>
+              {cat.items.map((item, j) => (
+                <li key={j}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+const FunFacts = () => (
+  <section className="fun-facts">
+    <div className="container">
+      <h2 className="section-title">A Bit About Me</h2>
+      <p className="section-subtitle">
+        When I'm not coding, I enjoy creating digital art, editing videos, and learning new tech.
+      </p>
+      <div style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        gap: '20px',
+        marginTop: '30px'
+      }}>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ fontSize: '2rem', marginBottom: '10px' }}>🎨</div>
+          <p><strong>Digital Art</strong></p>
+        </div>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ fontSize: '2rem', marginBottom: '10px' }}>🎵</div>
+          <p><strong>Video Editing</strong></p>
+        </div>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ fontSize: '2rem', marginBottom: '10px' }}>📚</div>
+          <p><strong>Tech Learning</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+);
 
 const Contact = () => {
   const contactCardStyle = {
@@ -268,25 +351,44 @@ const Contact = () => {
           marginTop: '20px'
         }}>
           <div style={contactCardStyle}>
-            <i className="fas fa-envelope" style={{ ...iconStyle, color: '#6366f1' }}></i>
+            <i className="fas fa-envelope" style={{ ...iconStyle, color: isDarkMode ? '#818cf8' : '#6366f1' }}></i>
             <h4>Email</h4>
-            <p><strong>albertnzubahimana@gmail.com</strong></p>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
+              <p><strong>albertnzubahimana@gmail.com</strong></p>
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText('albertnzubahimana@gmail.com');
+                  alert('Email copied to clipboard!');
+                }}
+                style={{
+                  background: '#6366f1',
+                  color: 'white',
+                  border: 'none',
+                  padding: '5px 10px',
+                  borderRadius: '5px',
+                  cursor: 'pointer',
+                  fontSize: '0.9rem'
+                }}
+              >
+                Copy
+              </button>
+            </div>
           </div>
 
           <div style={contactCardStyle}>
-            <i className="fas fa-map-marker-alt" style={{ ...iconStyle, color: '#6366f1' }}></i>
+            <i className="fas fa-map-marker-alt" style={{ ...iconStyle, color: isDarkMode ? '#818cf8' : '#6366f1' }}></i>
             <h4>Location</h4>
             <p><strong>Kigali, Rwanda</strong></p>
           </div>
 
           <div style={contactCardStyle}>
-            <i className="fas fa-home" style={{ ...iconStyle, color: '#6366f1' }}></i>
+            <i className="fas fa-home" style={{ ...iconStyle, color: isDarkMode ? '#818cf8' : '#6366f1' }}></i>
             <h4>Home Address</h4>
             <p><strong>Nothern, Rwanda</strong></p>
           </div>
 
           <div style={contactCardStyle}>
-            <i className="fas fa-phone" style={{ ...iconStyle, color: '#6366f1' }}></i>
+            <i className="fas fa-phone" style={{ ...iconStyle, color: isDarkMode ? '#818cf8' : '#6366f1' }}></i>
             <h4>Phone</h4>
             <p><strong>+250 724 051 404</strong><br/><strong>+250 793 120 674</strong></p>
           </div>
@@ -298,7 +400,7 @@ const Contact = () => {
               rel="noopener noreferrer"
               style={{ color: 'inherit', textDecoration: 'none' }}
             >
-              <i className="fab fa-whatsapp" style={{ ...iconStyle, color: '#25D366' }}></i>
+              <i className="fab fa-whatsapp" style={{ ...iconStyle, color: isDarkMode ? '#4FCE5D' : '#25D366' }}></i>
               <h4>WhatsApp</h4>
               <p><strong>Chat with Me</strong></p>
             </a>
@@ -311,7 +413,7 @@ const Contact = () => {
               rel="noopener noreferrer"
               style={{ color: 'inherit', textDecoration: 'none' }}
             >
-              <i className="fab fa-instagram" style={{ ...iconStyle, color: '#E4405F' }}></i>
+              <i className="fab fa-instagram" style={{ ...iconStyle, color: isDarkMode ? '#D9539C' : '#E4405F' }}></i>
               <h4>Instagram</h4>
               <p><strong>@albert_silenco</strong></p>
             </a>
@@ -325,6 +427,15 @@ const Contact = () => {
             style={{ padding: '16px 40px', fontSize: '1.2rem' }}
           >
             Send Email
+          </a>
+
+          <a
+            href="/files/Albert_Resume.pdf"
+            download="Albert_Silenco_Resume.pdf"
+            className="btn btn-large"
+            style={{ marginTop: '15px', background: '#10b981', color: 'white' }}
+          >
+            📄 Download Resume
           </a>
         </div>
       </div>
