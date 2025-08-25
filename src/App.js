@@ -36,29 +36,36 @@ function App() {
       {/* ===== Navbar ===== */}
       <nav className="navbar">
         <div className="nav-container">
-          {/* Logo */}
           <div className="nav-logo">
             <h2>Albert</h2>
           </div>
 
-          {/* Right Side: Dark Mode + Hamburger */}
-          <div className="nav-right">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
             {/* Dark Mode Toggle */}
             <button
               onClick={toggleDarkMode}
-              className="dark-mode-toggle"
-              aria-label="Toggle Dark Mode"
+              style={{
+                background: 'none',
+                border: '2px solid #6366f1',
+                borderRadius: '50%',
+                width: '40px',
+                height: '40px',
+                fontSize: '1.2rem',
+                color: isDarkMode ? '#818cf8' : '#6366f1',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
             >
               {isDarkMode ? '☀️' : '🌙'}
             </button>
 
-            {/* Hamburger Icon */}
             <div className="nav-toggle" onClick={toggleMenu}>
               <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
             </div>
           </div>
 
-          {/* Navigation Links */}
           <ul className={`nav-menu ${isMenuOpen ? 'nav-active' : ''}`}>
             <li><a href="#home" onClick={() => setIsMenuOpen(false)} className="nav-link">Home</a></li>
             <li><a href="#about" onClick={() => setIsMenuOpen(false)} className="nav-link">About</a></li>
@@ -69,8 +76,8 @@ function App() {
         </div>
       </nav>
 
-      {/* ===== Main Content (offset for fixed navbar) ===== */}
-      <main style={{ paddingTop: '80px' }}>
+      {/* ===== Main Content ===== */}
+      <main>
         <Hero />
         <About />
         <Skills />
@@ -89,10 +96,12 @@ const Hero = () => (
     <div className="container">
       <div className="hero-content">
         <div className="hero-text">
-          <h1>Hello, I'm <span className="text-gradient">Albert</span></h1>
-          <h3 className="subtitle">Full-Stack Developer</h3>
+          <h1 className="hero-title">
+            Hello, I'm <span className="text-gradient">Albert</span>
+          </h1>
+          <h3 className="hero-subtitle">Full-Stack Developer</h3>
           <p className="hero-description">
-            I build beautiful, fast, and responsive web apps with React, Node.js, Laravel, and modern tools.
+            I build fast, responsive, and scalable web apps with React, Node.js, Laravel, and modern design tools.
           </p>
           <div className="hero-btns">
             <a href="#projects" className="btn">View My Work</a>
