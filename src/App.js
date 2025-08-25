@@ -77,7 +77,7 @@ function App() {
       </nav>
 
       {/* ===== Main Content ===== */}
-      <main style={{ paddingTop: '80px' }}>
+      <main>
         <Hero />
         <About />
         <Skills />
@@ -89,19 +89,18 @@ function App() {
     </div>
   );
 }
-//components
+
+// ===== Components =====
 const Hero = () => (
   <section id="home" className="hero">
     <div className="container">
       <div className="hero-content">
         {/* Left: Text */}
         <div className="hero-text">
-          <h1 className="hero-title">
-            Hello, I'm <span className="text-gradient">Albert</span>
-          </h1>
-          <h3 className="hero-subtitle">Full-Stack Developer</h3>
+          <h1>Hello, I'm <span className="text-gradient">Albert</span></h1>
+          <h3 className="subtitle">Building Digital Experiences</h3>
           <p className="hero-description">
-            I build fast, clean, and modern web apps with React, Node.js, Laravel, and creative tools.
+            I craft fast, clean, and modern web apps with React, Node.js, Laravel, and creative design tools.
           </p>
           <div className="hero-btns">
             <a href="#projects" className="btn btn-large">View My Work</a>
@@ -121,6 +120,7 @@ const Hero = () => (
     </div>
   </section>
 );
+
 const About = () => (
   <section id="about" className="about">
     <div className="container">
