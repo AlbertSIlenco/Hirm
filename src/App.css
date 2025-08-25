@@ -345,8 +345,56 @@ body.dark-mode .footer {
   background: #0f172a;
 }
 
-/* Responsive */
+/* ===== Mobile Responsive - Horizontal-Like Layout ===== */
 @media (max-width: 768px) {
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 60px;
+    right: -100%;
+    width: 100%;
+    background: white;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    z-index: 999;
+    transition: right 0.3s ease;
+    /* Use flex to make links appear horizontal */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px 0;
+    border-top: 1px solid #eee;
+  }
+
+  body.dark-mode .nav-menu {
+    background: #1e293b;
+    border-top: 1px solid #334155;
+  }
+
+  .nav-menu.nav-active {
+    right: 0;
+  }
+
+  .nav-link {
+    color: var(--dark);
+    padding: 8px 15px;
+    border-radius: 30px;
+    font-size: 1rem;
+  }
+
+  body.dark-mode .nav-link {
+    color: #e2e8f0;
+  }
+
+  .nav-link:hover {
+    background: #6366f1;
+    color: white;
+  }
+
+  /* Existing responsive styles for content */
   .hero-content {
     flex-direction: column;
     text-align: center;
