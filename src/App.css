@@ -1,309 +1,370 @@
-/* src/App.css */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+// src/App.js
+import React, { useState, useEffect } from 'react';
+import './App.css';
 
-:root {
-  --primary: #6366f1;
-  --primary-dark: #4f46e5;
-  --secondary: #ec4899;
-  --dark: #0f172a;
-  --light: #f8fafc;
-  --gray: #64748b;
-  --card-bg: white;
-  --radius: 12px;
-  --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.15);
-  --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
-  --transition: all 0.3s ease;
+function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Load dark mode from localStorage
+  useEffect(() => {
+    const savedMode = localStorage.getItem('darkMode') === 'true';
+    setIsDarkMode(savedMode);
+    if (savedMode) {
+      document.body.classList.add('dark-mode');
+    }
+  }, []);
+
+  const toggleDarkMode = () => {
+    const newMode = !isDarkMode;
+    setIsDarkMode(newMode);
+    if (newMode) {
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('darkMode', 'true');
+    } else {
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('darkMode', 'false');
+    }
+  };
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  return (
+    <div className="App">
+      {/* ===== Navbar ===== */}
+      <nav className="navbar">
+        <div className="nav-container">
+          {/* Logo */}
+          <div className="nav-logo">
+            <h2>Albert</h2>
+          </div>
+
+          {/* Right Side: Dark Mode + Hamburger */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+            {/* Dark Mode Toggle */}
+            <button
+              onClick={toggleDarkMode}
+              style={{
+                background: 'none',
+                border: '2px solid #6366f1',
+                borderRadius: '50%',
+                width: '40px',
+                height: '40px',
+                fontSize: '1.2rem',
+                color: isDarkMode ? '#818cf8' : '#6366f1',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              {isDarkMode ? '☀️' : '🌙'}
+            </button>
+
+            <div className="nav-toggle" onClick={toggleMenu}>
+              <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+            </div>
+          </div>
+
+          {/* Navigation Links */}
+          <ul className={`nav-menu ${isMenuOpen ? 'nav-active' : ''}`}>
+            <li><a href="#home" onClick={() => setIsMenuOpen(false)} className="nav-link">Home</a></li>
+            <li><a href="#about" onClick={() => setIsMenuOpen(false)} className="nav-link">About</a></li>
+            <li><a href="#skills" onClick={() => setIsMenuOpen(false)} className="nav-link">Skills</a></li>
+            <li><a href="#projects" onClick={() => setIsMenuOpen(false)} className="nav-link">Projects</a></li>
+            <li><a href="#contact" onClick={() => setIsMenuOpen(false)} className="nav-link">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      {/* ===== Main Content ===== */}
+      <main>
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Contact />
+      </main>
+
+      <Footer />
+    </div>
+  );
 }
 
-body.dark-mode {
-  --card-bg: #334155;
-  --light: #0f172a;
-  --dark: #f8fafc;
-  --gray: #e2e8f0;
-}
+// ===== Components =====
+const Hero = () => (
+  <section id="home" className="hero">
+    <div className="container">
+      <div className="hero-content">
+        <div className="hero-text">
+          <h1>Hello, I'm <span className="text-gradient">Albert</span></h1>
+          <h3 className="subtitle">Full-Stack Developer</h3>
+          <p className="hero-description">
+            I build beautiful, fast, and responsive web apps with React, Node.js, Laravel, and modern tools.
+          </p>
+          <div className="hero-btns">
+            <a href="#projects" className="btn">View My Work</a>
+            <a href="#contact" className="btn btn-outline">Contact Me</a>
+          </div>
+        </div>
+        <div className="hero-image">
+          <img
+            src="/images/albert-profile.png"
+            alt="Albert"
+            className="profile-img"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+);
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  transition: background-color 0.4s ease, color 0.4s ease;
-}
+const About = () => (
+  <section id="about" className="about">
+    <div className="container">
+      <h2 className="section-title">About Me</h2>
+      <div className="about-content">
+        <div className="about-text">
+          <p className="about-paragraph">
+            Hi, I'm Albert or call me Silenco Hirm, a passionate developer with expertise in full-stack development, 
+            networking, and creative technologies.
+          </p>
+          <p className="about-paragraph">
+            I’ve studied Computer Systems & Architecture (CSA), Electronics, and I'm skilled in 
+            photo & video editing using Canva and CapCut.
+          </p>
+          <p className="about-paragraph">
+            I love turning ideas into functional, beautiful digital experiences.
+          </p>
+          <a href="#contact" className="btn">Let's Connect</a>
+        </div>
+        <div className="about-image">
+          <img
+            src="/images/albert-working.png"
+            alt="Albert working"
+            className="about-img"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+);
 
-body {
-  font-family: 'Inter', sans-serif;
-  background-color: var(--light);
-  color: var(--dark);
-  line-height: 1.6;
-}
+const Skills = () => {
+  const skills = [
+    'HTML/CSS', 'JavaScript', 'React', 'Node.js', 'Laravel', 'PHP',
+    'MySQL', 'Networking', 'CSA', 'Electronics', 'Photo Editing', 'Video Editing', 'Canva', 'CapCut'
+  ];
 
-body.dark-mode {
-  background-color: #0f172a;
-  color: #e2e8f0;
-}
+  return (
+    <section id="skills" className="skills">
+      <div className="container">
+        <h2 className="section-title">My Skills</h2>
+        <div className="skills-grid">
+          {skills.map((skill, i) => (
+            <div key={i} className="skill-tag">{skill}</div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700;
-}
+const Projects = () => {
+  const projects = [
+    {
+      title: "Personal Portfolio Website",
+      description: "A responsive portfolio built with React and GSAP for smooth animations and modern design.",
+      tags: ["React", "GSAP", "CSS3", "JavaScript"]
+    },
+    {
+      title: "Student Management System",
+      description: "A full-featured web app built with Laravel for managing student records, grades, and attendance with secure login and admin dashboard.",
+      tags: ["Laravel", "PHP", "MySQL", "Bootstrap", "Admin Panel"]
+    },
+    {
+      title: "Network Setup for Small Business",
+      description: "Designed and implemented a secure LAN network for a 15-user office, including router configuration and IP management.",
+      tags: ["Networking", "CSA", "Router Setup", "LAN"]
+    },
+    {
+      title: "Promotional Video Edits",
+      description: "Created engaging promotional videos for local businesses using CapCut and Canva with motion graphics and sound design.",
+      tags: ["CapCut", "Canva", "Video Editing", "Motion Graphics"]
+    },
+    {
+      title: "Digital Photo Editing Service",
+      description: "Provided professional photo retouching, color correction, and social media content design for clients.",
+      tags: ["Photo Editing", "Canva", "Color Grading", "Social Media"]
+    },
+    {
+      title: "IoT Electronics Project",
+      description: "Built a temperature monitoring system using sensors and a Raspberry Pi for real-time data display.",
+      tags: ["Electronics", "CSA", "Raspberry Pi", "Sensor Integration"]
+    },
+    {
+      title: "Website for Local Cafe",
+      description: "Designed and developed a responsive website with menu display and contact form using HTML, CSS, and JavaScript.",
+      tags: ["HTML/CSS", "JavaScript", "Responsive Design", "UI"]
+    }
+  ];
 
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
+  return (
+    <section id="projects" className="projects">
+      <div className="container">
+        <h2 className="section-title">My Projects</h2>
+        <p className="section-subtitle">
+          Here are some of the real-world projects I've worked on across web development, networking, electronics, and creative design.
+        </p>
 
-section {
-  padding: 100px 0;
-}
+        <div className="projects-grid">
+          {projects.map((project, index) => (
+            <div key={index} className="project-card">
+              <h3 className="project-title">{project.title}</h3>
+              <p className="project-description">{project.description}</p>
+              <div style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: '8px',
+                marginTop: '15px',
+                justifyContent: 'center'
+              }}>
+                {project.tags.map((tag, i) => (
+                  <span
+                    key={i}
+                    style={{
+                      background: tag.includes('Laravel') || tag.includes('PHP') 
+                        ? '#f9322c' 
+                        : tag.includes('React') || tag.includes('JavaScript') 
+                          ? '#61dafb' 
+                          : tag.includes('CapCut') || tag.includes('Canva')
+                            ? '#00c4cc' 
+                            : '#6366f1',
+                      color: 'white',
+                      padding: '6px 12px',
+                      borderRadius: '20px',
+                      fontSize: '0.8rem',
+                      fontWeight: '500'
+                    }}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
 
-.section-title {
-  font-size: 2.8rem;
-  text-align: center;
-  color: var(--dark);
-  margin-bottom: 20px;
-}
+const Contact = () => {
+  const contactCardStyle = {
+    background: 'var(--card-bg)',
+    padding: '25px',
+    borderRadius: '12px',
+    boxShadow: '0 10px 25px -10px rgba(0,0,0,0.1)',
+    width: '220px',
+    textAlign: 'center',
+    transition: 'transform 0.3s ease'
+  };
 
-body.dark-mode .section-title {
-  color: #f8fafc;
-}
+  const iconStyle = {
+    fontSize: '1.8rem',
+    marginBottom: '10px'
+  };
 
-.section-subtitle {
-  text-align: center;
-  max-width: 700px;
-  margin: 0 auto 60px;
-  color: var(--gray);
-  font-size: 1.1rem;
-}
+  return (
+    <section id="contact" className="contact">
+      <div className="container">
+        <h2 className="section-title">Get In Touch</h2>
+        <p className="section-subtitle">
+          I'm always open to discussing new opportunities, collaborations, and creative projects.
+        </p>
 
-body.dark-mode .section-subtitle {
-  color: #e2e8f0;
-}
+        <div style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          gap: '40px',
+          marginTop: '20px'
+        }}>
+          <div style={contactCardStyle}>
+            <i className="fas fa-envelope" style={{ ...iconStyle, color: '#6366f1' }}></i>
+            <h4>Email</h4>
+            <p><strong>albertnzubahimana@gmail.com</strong></p>
+          </div>
 
-/* ===== Navbar Styles ===== */
-.navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: white;
-  z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  padding: 15px 0;
-  /* Remove any backdrop-filter that causes blur/shading */
-}
+          <div style={contactCardStyle}>
+            <i className="fas fa-map-marker-alt" style={{ ...iconStyle, color: '#6366f1' }}></i>
+            <h4>Location</h4>
+            <p><strong>Kigali, Rwanda</strong></p>
+          </div>
 
-body.dark-mode .navbar {
-  background: #1e293b;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-}
+          <div style={contactCardStyle}>
+            <i className="fas fa-home" style={{ ...iconStyle, color: '#6366f1' }}></i>
+            <h4>Home Address</h4>
+            <p><strong>Nothern, Rwanda</strong></p>
+          </div>
 
-.nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-}
+          <div style={contactCardStyle}>
+            <i className="fas fa-phone" style={{ ...iconStyle, color: '#6366f1' }}></i>
+            <h4>Phone</h4>
+            <p><strong>+250 724 051 404</strong><br/><strong>+250 793 120 674</strong></p>
+          </div>
 
-.nav-logo h2 {
-  color: var(--primary);
-  font-size: 1.8rem;
-  margin: 0;
-  /* Remove any text-shadow or filter */
-  text-shadow: none;
-  filter: none;
-  font-weight: 700;
-}
+          {/* WhatsApp */}
+          <div style={contactCardStyle}>
+            <a
+              href="https://wa.me/250724051404"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: 'inherit', textDecoration: 'none' }}
+            >
+              <i className="fab fa-whatsapp" style={{ ...iconStyle, color: '#25D366' }}></i>
+              <h4>WhatsApp</h4>
+              <p><strong>Chat with Me</strong></p>
+            </a>
+          </div>
 
-/* ✅ CRITICAL FIX: Ensure "Albert" is bright white with no shading */
-body.dark-mode .nav-logo h2 {
-  color: white !important;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); /* Subtle glow, not shading */
-  filter: none;
-  font-weight: 700;
-}
+          {/* Instagram */}
+          <div style={contactCardStyle}>
+            <a
+              href="https://instagram.com/albert_silenco"  // Update with your handle
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: 'inherit', textDecoration: 'none' }}
+            >
+              <i className="fab fa-instagram" style={{ ...iconStyle, color: '#E4405F' }}></i>
+              <h4>Instagram</h4>
+              <p><strong>@albert_silenco</strong></p>
+            </a>
+          </div>
+        </div>
 
-/* Remove any backdrop-filter that causes blur */
-/* If you previously added backdrop-filter: blur(), remove it */
-/* Example of what NOT to have:
-   backdrop-filter: blur(10px); 
-*/
+        <div style={{ textAlign: 'center', marginTop: '50px' }}>
+          <a
+            href="mailto:albertnzubahimana@gmail.com"
+            className="btn"
+            style={{ padding: '16px 40px', fontSize: '1.1rem' }}
+          >
+            Send Email
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+};
 
-.nav-toggle {
-  font-size: 1.5rem;
-  color: var(--dark);
-  cursor: pointer;
-  display: none;
-}
+const Footer = () => (
+  <footer className="footer">
+    <div className="container">
+      <p>&copy; 2025 Albert. All rights reserved.</p>
+    </div>
+  </footer>
+);
 
-body.dark-mode .nav-toggle {
-  color: white;
-}
-
-.nav-menu {
-  display: flex;
-  list-style: none;
-  gap: 30px;
-}
-
-.nav-link {
-  color: var(--dark);
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.nav-link:hover {
-  color: var(--primary);
-}
-
-body.dark-mode .nav-link {
-  color: #e2e8f0;
-}
-
-body.dark-mode .nav-link:hover {
-  color: #818cf8;
-}
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
-  .nav-toggle {
-    display: block;
-  }
-
-  .nav-menu {
-    position: fixed;
-    top: 60px;
-    right: -100%;
-    width: 70%;
-    height: 100vh;
-    background: white;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: right 0.3s ease;
-    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-    z-index: 999;
-  }
-
-  body.dark-mode .nav-menu {
-    background: #1e293b;
-  }
-
-  .nav-active {
-    right: 0;
-  }
-}
-
-/* Buttons */
-.btn {
-  display: inline-block;
-  background: var(--primary);
-  color: white;
-  padding: 14px 30px;
-  border: none;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: 600;
-  box-shadow: var(--shadow);
-  transition: var(--transition);
-}
-
-.btn:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-lg);
-}
-
-.btn-outline {
-  background: transparent;
-  border: 2px solid var(--primary);
-  color: var(--primary);
-}
-
-.btn-outline:hover {
-  background: var(--primary);
-  color: white;
-}
-
-body.dark-mode .btn-outline {
-  border-color: #818cf8;
-  color: #818cf8;
-}
-
-body.dark-mode .btn-outline:hover {
-  background: #818cf8;
-  color: white;
-}
-
-/* Gradient Text */
-.text-gradient {
-  background: linear-gradient(90deg, var(--primary), var(--secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline;
-}
-
-body.dark-mode .text-gradient {
-  background: linear-gradient(90deg, #818cf8, #a78bfa);
-}
-
-/* Scrollbar */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: #f1f1f1; }
-::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: var(--primary-dark); }
-
-body.dark-mode ::-webkit-scrollbar-track { background: #1e293b; }
-body.dark-mode ::-webkit-scrollbar-thumb { background: #6366f1; }
-
-/* Components */
-.hero-content { display: flex; justify-content: space-between; align-items: center; gap: 50px; flex-wrap: wrap; }
-.hero-text { flex: 1; max-width: 600px; }
-.hero-text h1 { font-size: 3.5rem; color: var(--dark); margin: 10px 0; }
-body.dark-mode .hero-text h1 { color: #f8fafc; }
-.hero-text .subtitle { font-size: 1.8rem; color: var(--primary); margin: 15px 0; font-weight: 500; }
-body.dark-mode .hero-text .subtitle { color: #818cf8; }
-.hero-text .hero-description { color: var(--gray); font-size: 1.1rem; line-height: 1.7; margin: 20px 0; }
-body.dark-mode .hero-text .hero-description { color: #e2e8f0; }
-.hero-btns { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 20px; }
-.profile-img { width: 300px; height: 300px; border-radius: 50%; border: 5px solid white; box-shadow: var(--shadow-lg); object-fit: cover; }
-
-.about-content { display: flex; gap: 50px; align-items: center; flex-wrap: wrap; }
-.about-text { flex: 1; }
-.about-paragraph { color: var(--gray); line-height: 1.7; margin-bottom: 20px; }
-body.dark-mode .about-paragraph { color: #e2e8f0; }
-.about-img { width: 100%; border-radius: var(--radius); box-shadow: var(--shadow-lg); }
-
-.skills-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 40px; }
-.skill-tag { 
-  background: #f1f5f9; 
-  color: var(--dark); 
-  padding: 12px 24px; 
-  border-radius: 30px; 
-  font-size: 0.95rem; 
-  border: 1px solid #e2e8f0; 
-  font-weight: 500; 
-  transition: var(--transition);
-}
-body.dark-mode .skill-tag { 
-  background: #475569 !important; 
-  color: #e2e8f0; 
-}
-.skill-tag:hover { 
-  background: var(--primary); 
-  color: white; 
-  transform: translateY(-3px); 
-}
-
-.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
-.project-card { background: var(--card-bg); padding: 30px; border-radius: var(--radius); box-shadow: var(--shadow); text-align: center; transition: var(--transition); }
-.project-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); }
-.project-title { font-size: 1.5rem; color: var(--dark); margin: 10px 0; }
-body.dark-mode .project-title { color: #f8fafc; }
-.project-description { color: var(--gray); font-size: 1rem; }
-body.dark-mode .project-description { color: #e2e8f0; }
-
-.footer { background: var(--dark); color: white; text-align: center; padding: 40px 0; }
-.footer p { margin: 10px 0; font-size: 0.9rem; color: #ccc; }
-body.dark-mode .footer { background: #0f172a; border-top: 1px solid #334155; }
+export default App;
