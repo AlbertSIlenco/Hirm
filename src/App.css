@@ -55,11 +55,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0 20px;
 }
 
-section {
-  padding: 100px 0;
-}
-
-/* ===== Hero Section - Fixed for Dark Mode ===== */
+/* ===== Hero Section - Dark Mode Fixed ===== */
 .hero {
   padding-top: 100px;
   min-height: 90vh;
@@ -205,30 +201,66 @@ body.dark-mode .btn-outline:hover {
 }
 
 /* ===== About Section ===== */
-.about-content {
-  display: flex;
-  gap: 50px;
-  align-items: center;
-  flex-wrap: wrap;
+.about {
+  background: #f8fafc;
 }
 
-.about-paragraph {
-  color: var(--gray);
-  line-height: 1.7;
-  margin-bottom: 20px;
-}
-
-body.dark-mode .about-paragraph {
-  color: #e2e8f0;
-}
-
-.about-img {
-  width: 100%;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-lg);
+body.dark-mode .about {
+  background: #0f172a;
 }
 
 /* ===== Skills Section ===== */
+.skills {
+  background: #f1f5f9;
+}
+
+body.dark-mode .skills {
+  background: #1e293b;
+}
+
+/* ===== Projects Section ===== */
+.projects {
+  background: #f8fafc;
+}
+
+body.dark-mode .projects {
+  background: #0f172a;
+}
+
+/* ===== Contact Section ===== */
+.contact {
+  background: #f1f5f9;
+}
+
+body.dark-mode .contact {
+  background: #1e293b;
+}
+
+/* Reusable Styles */
+.section-title {
+  font-size: 2.8rem;
+  text-align: center;
+  color: var(--dark);
+  margin-bottom: 20px;
+}
+
+body.dark-mode .section-title {
+  color: #f8fafc;
+}
+
+.section-subtitle {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 60px;
+  color: var(--gray);
+  font-size: 1.1rem;
+}
+
+body.dark-mode .section-subtitle {
+  color: #e2e8f0;
+}
+
+/* Skills Grid */
 .skills-grid {
   display: flex;
   flex-wrap: wrap;
@@ -259,7 +291,7 @@ body.dark-mode .skill-tag {
   transform: translateY(-3px);
 }
 
-/* ===== Projects Section ===== */
+/* Projects Grid */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -301,7 +333,7 @@ body.dark-mode .project-description {
   color: #e2e8f0;
 }
 
-/* ===== Contact & Footer ===== */
+/* Footer */
 .footer {
   background: var(--dark);
   color: white;
@@ -313,7 +345,7 @@ body.dark-mode .footer {
   background: #0f172a;
 }
 
-/* ===== Responsive ===== */
+/* Responsive */
 @media (max-width: 768px) {
   .hero-content {
     flex-direction: column;
@@ -332,12 +364,5 @@ body.dark-mode .footer {
 
   .hero-btns {
     justify-content: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .profile-img {
-    width: 180px;
-    height: 180px;
   }
 }
