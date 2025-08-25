@@ -270,7 +270,6 @@ body.dark-mode .btn-outline:hover {
   color: white;
 }
 
-/* Large Buttons */
 .btn-large {
   padding: 16px 40px !important;
   font-size: 1.1rem !important;
@@ -406,7 +405,7 @@ body.dark-mode .project-description {
   font-weight: 500;
 }
 
-/* Contact & Footer */
+/* Footer */
 .footer {
   background: var(--dark);
   color: white;
