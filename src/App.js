@@ -96,19 +96,14 @@ const Hero = () => (
     <div className="container">
       <div className="hero-content">
         <div className="hero-text">
-          <h1 className="hero-title">
-            Crafting Digital <br />
-            <span className="text-gradient">Experiences</span> That Matter
-          </h1>
-          <h3 className="hero-subtitle">
-              I'm <strong>Albert</strong>, Full-Stack Developer & Creative Technologist
-          </h3>
+          <h1>Hello, I'm <span className="text-gradient">Albert</span></h1>
+          <h3 className="subtitle">Full-Stack Developer & Creative Technologist</h3>
           <p className="hero-description">
-            From clean code to compelling visuals, I build full-stack web apps that are fast, secure, and designed to impress.
+            I build fast, responsive, and scalable web applications using React, Node.js, Laravel, and modern design tools.
           </p>
           <div className="hero-btns">
-            <a href="#projects" className="btn btn-large">See My Work</a>
-            <a href="#contact" className="btn btn-outline btn-large">Let’s Talk</a>
+            <a href="#projects" className="btn">View My Work</a>
+            <a href="#contact" className="btn btn-outline">Contact Me</a>
           </div>
         </div>
         <div className="hero-image">
@@ -122,6 +117,7 @@ const Hero = () => (
     </div>
   </section>
 );
+
 const About = () => (
   <section id="about" className="about">
     <div className="container">
@@ -129,22 +125,20 @@ const About = () => (
       <div className="about-content">
         <div className="about-text">
           <p className="about-paragraph">
-            Hi, I'm Albert or call me Silenco Hirm, a passionate developer with expertise in full-stack development, 
-            networking, and creative technologies.
+            I'm Albert, also known as Silenco Hirm — a passionate full-stack developer with expertise in web development, networking, and digital creativity.
           </p>
           <p className="about-paragraph">
-            I’ve studied Computer Systems & Architecture (CSA), Electronics, and I'm skilled in 
-            photo & video editing using Canva and CapCut.
+            I’ve studied Computer Systems & Architecture (CSA) and Electronics, and I’m skilled in photo and video editing using Canva and CapCut.
           </p>
           <p className="about-paragraph">
-            I love turning ideas into functional, beautiful digital experiences.
+            I enjoy turning ideas into clean, functional, and beautiful digital experiences that solve real problems.
           </p>
-          <a href="#contact" className="btn btn-large">Let's Connect</a>
+          <a href="#contact" className="btn">Let's Connect</a>
         </div>
         <div className="about-image">
           <img
             src="/images/albert-working.png"
-            alt="Albert working"
+            alt="Albert working on laptop"
             className="about-img"
           />
         </div>
@@ -178,44 +172,37 @@ const Projects = () => {
     {
       title: "Personal Portfolio Website",
       description: "A responsive portfolio built with React and GSAP for smooth animations and modern design.",
-      tags: ["React", "GSAP", "CSS3", "JavaScript"],
-      color: "#61dafb"
+      tags: ["React", "GSAP", "CSS3", "JavaScript"]
     },
     {
       title: "Student Management System",
       description: "A full-featured web app built with Laravel for managing student records, grades, and attendance with secure login and admin dashboard.",
-      tags: ["Laravel", "PHP", "MySQL", "Bootstrap", "Admin Panel"],
-      color: "#f9322c"
+      tags: ["Laravel", "PHP", "MySQL", "Bootstrap", "Admin Panel"]
     },
     {
       title: "Network Setup for Small Business",
       description: "Designed and implemented a secure LAN network for a 15-user office, including router configuration and IP management.",
-      tags: ["Networking", "CSA", "Router Setup", "LAN"],
-      color: "#10b981"
+      tags: ["Networking", "CSA", "Router Setup", "LAN"]
     },
     {
       title: "Promotional Video Edits",
       description: "Created engaging promotional videos for local businesses using CapCut and Canva with motion graphics and sound design.",
-      tags: ["CapCut", "Canva", "Video Editing", "Motion Graphics"],
-      color: "#00c4cc"
+      tags: ["CapCut", "Canva", "Video Editing", "Motion Graphics"]
     },
     {
       title: "Digital Photo Editing Service",
       description: "Provided professional photo retouching, color correction, and social media content design for clients.",
-      tags: ["Photo Editing", "Canva", "Color Grading", "Social Media"],
-      color: "#8b5cf6"
+      tags: ["Photo Editing", "Canva", "Color Grading", "Social Media"]
     },
     {
       title: "IoT Electronics Project",
       description: "Built a temperature monitoring system using sensors and a Raspberry Pi for real-time data display.",
-      tags: ["Electronics", "CSA", "Raspberry Pi", "Sensor Integration"],
-      color: "#f59e0b"
+      tags: ["Electronics", "CSA", "Raspberry Pi", "Sensor Integration"]
     },
     {
       title: "Website for Local Cafe",
       description: "Designed and developed a responsive website with menu display and contact form using HTML, CSS, and JavaScript.",
-      tags: ["HTML/CSS", "JavaScript", "Responsive Design", "UI"],
-      color: "#ef4444"
+      tags: ["HTML/CSS", "JavaScript", "Responsive Design", "UI"]
     }
   ];
 
@@ -230,16 +217,33 @@ const Projects = () => {
         <div className="projects-grid">
           {projects.map((project, index) => (
             <div key={index} className="project-card">
-              <div className="project-header" style={{ background: project.color }}>
-                <h3 className="project-title">{project.title}</h3>
-              </div>
+              <h3 className="project-title">{project.title}</h3>
               <p className="project-description">{project.description}</p>
-              <div className="project-tags">
+              <div style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: '8px',
+                marginTop: '15px',
+                justifyContent: 'center'
+              }}>
                 {project.tags.map((tag, i) => (
-                  <span key={i} className="tag" style={{
-                    background: project.color,
-                    color: 'white'
-                  }}>
+                  <span
+                    key={i}
+                    style={{
+                      background: tag.includes('Laravel') || tag.includes('PHP') 
+                        ? '#f9322c' 
+                        : tag.includes('React') || tag.includes('JavaScript') 
+                          ? '#61dafb' 
+                          : tag.includes('CapCut') || tag.includes('Canva')
+                            ? '#00c4cc' 
+                            : '#6366f1',
+                      color: 'white',
+                      padding: '6px 12px',
+                      borderRadius: '20px',
+                      fontSize: '0.8rem',
+                      fontWeight: '500'
+                    }}
+                  >
                     {tag}
                   </span>
                 ))}
@@ -338,8 +342,8 @@ const Contact = () => {
         <div style={{ textAlign: 'center', marginTop: '50px' }}>
           <a
             href="mailto:albertnzubahimana@gmail.com"
-            className="btn btn-large"
-            style={{ padding: '16px 40px', fontSize: '1.2rem' }}
+            className="btn"
+            style={{ padding: '16px 40px', fontSize: '1.1rem' }}
           >
             Send Email
           </a>
