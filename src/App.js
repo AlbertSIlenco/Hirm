@@ -76,7 +76,6 @@ function App() {
             <li><a href="#skills" onClick={closeMenu} className="nav-link">Skills</a></li>
             <li><a href="#projects" onClick={closeMenu} className="nav-link">Projects</a></li>
             <li><a href="#gallery" onClick={closeMenu} className="nav-link">Gallery</a></li>
-            <li><a href="#youtube" onClick={closeMenu} className="nav-link">YouTube</a></li>
             <li><a href="#contact" onClick={closeMenu} className="nav-link">Contact</a></li>
           </ul>
         </div>
@@ -220,53 +219,12 @@ function App() {
               A collection of my best photo edits, video designs, UI mockups, and digital creations.
             </p>
             <div className="gallery-grid">
-              {[
-                '/images/gallery1.jpg',
-                '/images/gallery2.jpg',
-                '/images/gallery3.jpg',
-                '/images/gallery4.jpg',
-                '/images/gallery5.jpg',
-                '/images/gallery6.jpg'
-              ].map((img, i) => (
-                <img
-                  key={i}
-                  src={img}
-                  alt={`Gallery item ${i + 1}`}
-                  className="gallery-item"
-                />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ===== YouTube Section ===== */}
-        <section id="youtube" className="youtube">
-          <div className="container">
-            <h2 className="section-title">YouTube Channel</h2>
-            <p className="section-subtitle">
-              Check out my creative journey — from video editing tips to tech tutorials.
-            </p>
-            <div className="youtube-content">
-              <iframe
-                width="100%"
-                height="400"
-                src="https://www.youtube.com/embed?listType=user_uploads&list=albertsilenco"
-                title="Albert Silenco - YouTube Videos"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="youtube-video"
-              ></iframe>
-
-              <a
-                href="https://youtube.com/@albertsilenco"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-large"
-                style={{ backgroundColor: '#FF0000', borderColor: '#FF0000', marginTop: '20px' }}
-              >
-                🔴 Watch on YouTube
-              </a>
+              <img src="/images/IMG-20250804-WA0008.jpg" alt="Project 1" className="gallery-item" />
+              <img src="/images/IMG_20250820_155002_854.jpg" alt="Project 2" className="gallery-item" />
+              <img src="/images/IMG_20250820_155002_854~2.jpg" alt="Project 3" className="gallery-item" />
+              <img src="/images/y.jpg" alt="YouTube Thumbnail" className="gallery-item" />
+              <img src="/images/Copy of profile.png" alt="Profile Edit" className="gallery-item" />
+              <img src="/images/albert-working.png" alt="Work Setup" className="gallery-item" />
             </div>
           </div>
         </section>
@@ -285,40 +243,53 @@ function App() {
               gap: '40px',
               marginTop: '20px'
             }}>
-              {[
-                { icon: 'fa-envelope', label: 'Email', info: 'albertnzubahimana@gmail.com', color: '#6366f1' },
-                { icon: 'fa-map-marker-alt', label: 'Location', info: 'Kigali, Rwanda', color: '#6366f1' },
-                { icon: 'fa-home', label: 'Home Address', info: 'Nothern, Rwanda', color: '#6366f1' },
-                { icon: 'fa-phone', label: 'Phone', info: '+250 724 051 404\n+250 793 120 674', color: '#6366f1' },
-                { icon: 'fab fa-whatsapp', label: 'WhatsApp', info: 'Chat with Me', color: '#25D366', link: 'https://wa.me/250724051404' },
-                { icon: 'fab fa-instagram', label: 'Instagram', info: '@albert_silenco', color: '#E4405F', link: 'https://instagram.com/albert_silenco' }
-              ].map((item, i) => (
-                <div key={i} style={{
-                  background: 'var(--card-bg)',
-                  padding: '25px',
-                  borderRadius: '12px',
-                  boxShadow: '0 10px 25px -10px rgba(0,0,0,0.1)',
-                  width: '220px',
-                  textAlign: 'center',
-                  transition: 'transform 0.3s ease'
-                }}>
-                  <a
-                    href={item.link || '#'}
-                    target={item.link ? '_blank' : ''}
-                    rel={item.link ? 'noopener noreferrer' : ''}
-                    style={{ color: 'inherit', textDecoration: 'none' }}
-                  >
-                    <i className={item.icon} style={{
-                      fontSize: '1.8rem',
-                      color: item.color,
-                      marginBottom: '10px'
-                    }}></i>
-                    <h4>{item.label}</h4>
-                    <p style={{ whiteSpace: 'pre-line' }}><strong>{item.info}</strong></p>
-                  </a>
-                </div>
-              ))}
+              {/* Email */}
+              <div style={cardStyle()}>
+                <i className="fas fa-envelope" style={iconStyle()}></i>
+                <h4>Email</h4>
+                <p><strong>albertnzubahimana@gmail.com</strong></p>
+              </div>
+
+              {/* Location */}
+              <div style={cardStyle()}>
+                <i className="fas fa-map-marker-alt" style={iconStyle()}></i>
+                <h4>Location</h4>
+                <p><strong>Kigali, Rwanda</strong></p>
+              </div>
+
+              {/* Home Address */}
+              <div style={cardStyle()}>
+                <i className="fas fa-home" style={iconStyle()}></i>
+                <h4>Home Address</h4>
+                <p><strong>Nothern, Rwanda</strong></p>
+              </div>
+
+              {/* Phone */}
+              <div style={cardStyle()}>
+                <i className="fas fa-phone" style={iconStyle()}></i>
+                <h4>Phone</h4>
+                <p><strong>+250 724 051 404</strong><br/><strong>+250 793 120 674</strong></p>
+              </div>
+
+              {/* WhatsApp */}
+              <div style={cardStyle()}>
+                <a href="https://wa.me/250724051404" target="_blank" rel="noopener noreferrer" style={linkStyle()}>
+                  <i className="fab fa-whatsapp" style={{ ...iconStyle(), color: '#25D366' }}></i>
+                  <h4>WhatsApp</h4>
+                  <p><strong>Chat with Me</strong></p>
+                </a>
+              </div>
+
+              {/* YouTube */}
+              <div style={cardStyle()}>
+                <a href="https://youtube.com/@albertsilenco" target="_blank" rel="noopener noreferrer" style={linkStyle()}>
+                  <i className="fab fa-youtube" style={{ ...iconStyle(), color: '#FF0000' }}></i>
+                  <h4>YouTube</h4>
+                  <p><strong>@albertsilenco</strong></p>
+                </a>
+              </div>
             </div>
+
             <div style={{ textAlign: 'center', marginTop: '50px' }}>
               <a
                 href="mailto:albertnzubahimana@gmail.com"
@@ -340,6 +311,30 @@ function App() {
       </footer>
     </div>
   );
+
+  function cardStyle() {
+    return {
+      background: 'var(--card-bg)',
+      padding: '25px',
+      borderRadius: '12px',
+      boxShadow: '0 10px 25px -10px rgba(0,0,0,0.1)',
+      width: '220px',
+      textAlign: 'center',
+      transition: 'transform 0.3s ease'
+    };
+  }
+
+  function iconStyle() {
+    return {
+      fontSize: '1.8rem',
+      color: '#6366f1',
+      marginBottom: '10px'
+    };
+  }
+
+  function linkStyle() {
+    return { color: 'inherit', textDecoration: 'none' };
+  }
 }
 
 export default App;
