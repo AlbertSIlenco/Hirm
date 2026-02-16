@@ -472,28 +472,6 @@ body.dark-mode .gallery {
   transform: scale(1.03);
 }
 
-/* ===== YouTube Section ===== */
-.youtube {
-  background: #f1f5f9;
-  padding: 100px 0;
-  text-align: center;
-}
-
-body.dark-mode .youtube {
-  background: #1e293b;
-}
-
-.youtube-content {
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.youtube-video {
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
-}
-
 /* ===== Contact Section ===== */
 .contact {
   background: #f1f5f9;
