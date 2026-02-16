@@ -85,7 +85,6 @@ body.dark-mode .navbar {
   color: #6366f1;
   font-size: 1.8rem;
   margin: 0;
-  font-weight: 700;
 }
 
 body.dark-mode .nav-logo h2 {
@@ -158,12 +157,12 @@ body.dark-mode .nav-link:hover {
   }
 }
 
-/* ===== Push Content Below Fixed Navbar ===== */
+/* ===== Push Content Below Navbar ===== */
 main {
   padding-top: 80px;
 }
 
-/* ===== Hero Section - Profile on Right ===== */
+/* ===== Hero Section ===== */
 .hero {
   padding-top: 100px;
   min-height: 90vh;
@@ -181,6 +180,7 @@ body.dark-mode .hero {
   justify-content: space-between;
   align-items: center;
   gap: 50px;
+  flex-wrap: wrap;
 }
 
 .hero-text {
@@ -212,25 +212,25 @@ body.dark-mode .text-gradient {
   background: linear-gradient(90deg, #818cf8, #f0abfc);
 }
 
-.hero-text .subtitle {
+.subtitle {
   font-size: 1.8rem;
   color: var(--primary);
   margin: 15px 0;
   font-weight: 500;
 }
 
-body.dark-mode .hero-text .subtitle {
+body.dark-mode .subtitle {
   color: #818cf8;
 }
 
-.hero-text .hero-description {
+.hero-description {
   color: var(--gray);
   font-size: 1.1rem;
   line-height: 1.7;
   margin: 20px 0;
 }
 
-body.dark-mode .hero-text .hero-description {
+body.dark-mode .hero-description {
   color: #e2e8f0;
 }
 
@@ -286,14 +286,7 @@ body.dark-mode .btn-outline:hover {
   font-size: 1.1rem !important;
 }
 
-/* Right Side: Profile Image */
-.hero-image {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
+/* Profile Image */
 .profile-img {
   width: 280px;
   height: 280px;
@@ -325,10 +318,6 @@ body.dark-mode .about {
   flex-wrap: wrap;
 }
 
-.about-text {
-  flex: 1;
-}
-
 .about-paragraph {
   color: var(--gray);
   line-height: 1.7;
@@ -345,7 +334,7 @@ body.dark-mode .about-paragraph {
   box-shadow: var(--shadow-lg);
 }
 
-/* ===== Skills Section - Box Form ===== */
+/* ===== Skills Section ===== */
 .skills {
   background: #f1f5f9;
   padding: 100px 0;
@@ -385,7 +374,7 @@ body.dark-mode .skill-tag {
   transform: translateY(-3px);
 }
 
-/* ===== Projects Section - Tags in Box Form ===== */
+/* ===== Projects Section ===== */
 .projects {
   background: #f8fafc;
   padding: 100px 0;
@@ -453,6 +442,58 @@ body.dark-mode .project-description {
   font-weight: 500;
 }
 
+/* ===== Gallery Section ===== */
+.gallery {
+  background: #f8fafc;
+  padding: 100px 0;
+}
+
+body.dark-mode .gallery {
+  background: #0f172a;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.gallery-item {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: scale(1.03);
+}
+
+/* ===== YouTube Section ===== */
+.youtube {
+  background: #f1f5f9;
+  padding: 100px 0;
+  text-align: center;
+}
+
+body.dark-mode .youtube {
+  background: #1e293b;
+}
+
+.youtube-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.youtube-video {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
+}
+
 /* ===== Contact Section ===== */
 .contact {
   background: #f1f5f9;
@@ -463,7 +504,6 @@ body.dark-mode .contact {
   background: #1e293b;
 }
 
-/* Reusable Styles */
 .section-title {
   font-size: 2.8rem;
   text-align: center;
