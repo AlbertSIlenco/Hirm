@@ -10,9 +10,7 @@ function App() {
   useEffect(() => {
     const savedMode = localStorage.getItem('darkMode') === 'true';
     setIsDarkMode(savedMode);
-    if (savedMode) {
-      document.body.classList.add('dark-mode');
-    }
+    if (savedMode) document.body.classList.add('dark-mode');
   }, []);
 
   const toggleDarkMode = () => {
@@ -83,7 +81,7 @@ function App() {
 
       {/* ===== Main Content ===== */}
       <main>
-        {/* ===== Hero Section (Always Visible) ===== */}
+        {/* ===== Hero Section ===== */}
         <section id="home" className="hero">
           <div className="container">
             <div className="hero-content">
@@ -109,8 +107,8 @@ function App() {
           </div>
         </section>
 
-        {/* ===== Hidden Sections (Appear on click via nav) ===== */}
-        <div className="page-content">
+        {/* ===== Hidden Sections (Load when nav clicked) ===== */}
+        <div className="page-wrapper">
           <About />
           <Skills />
           <Projects />
@@ -261,92 +259,59 @@ const Gallery = () => (
 );
 
 // ===== Contact Section =====
-const Contact = () => {
-  const contactCardStyle = {
-    background: 'var(--card-bg)',
-    padding: '25px',
-    borderRadius: '12px',
-    boxShadow: '0 10px 25px -10px rgba(0,0,0,0.1)',
-    width: '220px',
-    textAlign: 'center',
-    transition: 'transform 0.3s ease'
-  };
-
-  const iconStyle = {
-    fontSize: '1.8rem',
-    marginBottom: '10px'
-  };
-
-  return (
-    <section id="contact" className="contact">
-      <div className="container">
-        <h2 className="section-title">Get In Touch</h2>
-        <p className="section-subtitle">
-          I'm always open to discussing new opportunities, collaborations, and creative projects.
-        </p>
-        <div style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          gap: '40px',
-          marginTop: '20px'
-        }}>
-          <div style={contactCardStyle}>
-            <i className="fas fa-envelope" style={iconStyle}></i>
-            <h4>Email</h4>
-            <p><strong>albertnzubahimana@gmail.com</strong></p>
-          </div>
-
-          <div style={contactCardStyle}>
-            <i className="fas fa-map-marker-alt" style={iconStyle}></i>
-            <h4>Location</h4>
-            <p><strong>Kigali, Rwanda</strong></p>
-          </div>
-
-          <div style={contactCardStyle}>
-            <i className="fas fa-phone" style={iconStyle}></i>
-            <h4>Phone</h4>
-            <p><strong>+250 724 051 404</strong><br/><strong>+250 793 120 674</strong></p>
-          </div>
-
-          <div style={contactCardStyle}>
-            <a href="https://wa.me/250724051404" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>
-              <i className="fab fa-whatsapp" style={{ ...iconStyle, color: '#25D366' }}></i>
-              <h4>WhatsApp</h4>
-              <p><strong>Chat with Me</strong></p>
-            </a>
-          </div>
-
-          <div style={contactCardStyle}>
-            <a href="https://youtube.com/@albertsilenco" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>
-              <i className="fab fa-youtube" style={{ ...iconStyle, color: '#FF0000' }}></i>
-              <h4>YouTube</h4>
-              <p><strong>@albertsilenco</strong></p>
-            </a>
-          </div>
-
-          <div style={contactCardStyle}>
-            <a href="https://instagram.com/albert_silenco" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>
-              <i className="fab fa-instagram" style={{ ...iconStyle, color: '#E4405F' }}></i>
-              <h4>Instagram</h4>
-              <p><strong>@albert_silenco</strong></p>
-            </a>
-          </div>
+const Contact = () => (
+  <section id="contact" className="contact">
+    <div className="container">
+      <h2 className="section-title">Get In Touch</h2>
+      <p className="section-subtitle">
+        I'm always open to discussing new opportunities, collaborations, and creative projects.
+      </p>
+      <div className="contact-grid">
+        <div className="contact-card">
+          <i className="fas fa-envelope"></i>
+          <h4>Email</h4>
+          <p><strong>albertnzubahimana@gmail.com</strong></p>
         </div>
-
-        <div style={{ textAlign: 'center', marginTop: '50px' }}>
-          <a
-            href="mailto:albertnzubahimana@gmail.com"
-            className="btn"
-            style={{ padding: '16px 40px', fontSize: '1.1rem' }}
-          >
-            Send Email
+        <div className="contact-card">
+          <i className="fas fa-map-marker-alt"></i>
+          <h4>Location</h4>
+          <p><strong>Kigali, Rwanda</strong></p>
+        </div>
+        <div className="contact-card">
+          <i className="fas fa-phone"></i>
+          <h4>Phone</h4>
+          <p><strong>+250 724 051 404</strong><br/><strong>+250 793 120 674</strong></p>
+        </div>
+        <div className="contact-card">
+          <a href="https://wa.me/250724051404" target="_blank" rel="noopener noreferrer">
+            <i className="fab fa-whatsapp"></i>
+            <h4>WhatsApp</h4>
+            <p><strong>Chat with Me</strong></p>
+          </a>
+        </div>
+        <div className="contact-card">
+          <a href="https://youtube.com/@albertsilenco" target="_blank" rel="noopener noreferrer">
+            <i className="fab fa-youtube"></i>
+            <h4>YouTube</h4>
+            <p><strong>@albertsilenco</strong></p>
+          </a>
+        </div>
+        <div className="contact-card">
+          <a href="https://instagram.com/albert_silenco" target="_blank" rel="noopener noreferrer">
+            <i className="fab fa-instagram"></i>
+            <h4>Instagram</h4>
+            <p><strong>@albert_silenco</strong></p>
           </a>
         </div>
       </div>
-    </section>
-  );
-};
+      <div className="contact-email">
+        <a href="mailto:albertnzubahimana@gmail.com" className="btn btn-large">
+          Send Email
+        </a>
+      </div>
+    </div>
+  </section>
+);
 
 // ===== Footer =====
 const Footer = () => (
