@@ -41,7 +41,7 @@ function App() {
       <nav className="navbar">
         <div className="nav-container">
           <div className="nav-logo">
-            <h2>Albert</h2>
+            <h2>Albert S.</h2>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
@@ -88,7 +88,7 @@ function App() {
           <div className="container">
             <div className="hero-content">
               <div className="hero-text">
-                <h1>Hello, I'm <span className="text-gradient">Albert</span></h1>
+                <h1>Hello, I'm <span className="text-gradient">Albert Silencco</span></h1>
                 <h3 className="subtitle">Building Digital Experiences</h3>
                 <p className="hero-description">
                   I craft fast, clean, and modern web apps with React, Node.js, Laravel, and creative design tools.
@@ -116,7 +116,7 @@ function App() {
             <div className="about-content">
               <div className="about-text">
                 <p className="about-paragraph">
-                  Hi, I'm Albert, also known as Silenco Hirm — a passionate full-stack developer with expertise in web development, networking, and digital creativity.
+                  Hi, I'm Albert Silencco — a passionate full-stack developer with expertise in web development, networking, and digital creativity.
                 </p>
                 <p className="about-paragraph">
                   I’ve studied Computer Systems & Architecture (CSA) and Electronics, and I'm skilled in photo and video editing using Canva and CapCut.
@@ -211,7 +211,7 @@ function App() {
           </div>
         </section>
 
-        {/* ===== Gallery Section ===== */}
+        {/* ===== Gallery Section (Only shows when clicked from nav) ===== */}
         <section id="gallery" className="gallery">
           <div className="container">
             <h2 className="section-title">My Creative Gallery</h2>
@@ -257,13 +257,6 @@ function App() {
                 <p><strong>Kigali, Rwanda</strong></p>
               </div>
 
-              {/* Home Address */}
-              <div style={cardStyle()}>
-                <i className="fas fa-home" style={iconStyle()}></i>
-                <h4>Home Address</h4>
-                <p><strong>Nothern, Rwanda</strong></p>
-              </div>
-
               {/* Phone */}
               <div style={cardStyle()}>
                 <i className="fas fa-phone" style={iconStyle()}></i>
@@ -288,6 +281,15 @@ function App() {
                   <p><strong>@albertsilenco</strong></p>
                 </a>
               </div>
+
+              {/* Instagram */}
+              <div style={cardStyle()}>
+                <a href="https://instagram.com/albert_silenco" target="_blank" rel="noopener noreferrer" style={linkStyle()}>
+                  <i className="fab fa-instagram" style={{ ...iconStyle(), color: '#E4405F' }}></i>
+                  <h4>Instagram</h4>
+                  <p><strong>@albert_silenco</strong></p>
+                </a>
+              </div>
             </div>
 
             <div style={{ textAlign: 'center', marginTop: '50px' }}>
@@ -306,7 +308,7 @@ function App() {
       {/* ===== Footer ===== */}
       <footer className="footer">
         <div className="container">
-          <p>&copy; 2025 Albert. All rights reserved.</p>
+          <p>&copy; 2025 Albert Silencco. All rights reserved.</p>
         </div>
       </footer>
     </div>
@@ -327,7 +329,6 @@ function App() {
   function iconStyle() {
     return {
       fontSize: '1.8rem',
-      color: '#6366f1',
       marginBottom: '10px'
     };
   }
