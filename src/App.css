@@ -603,79 +603,127 @@ body.dark-mode .footer {
 }
 
 /* ========================================= */
-/* ===== NEW FEATURE STYLES (ADDED) ===== */
+/* ===== COOL UPGRADE PACK (ADDED) ===== */
 /* ========================================= */
 
-/* 1. Active Nav Link Highlight */
-.nav-link.active-link {
-  color: var(--primary) !important;
-  font-weight: 700 !important;
-  position: relative;
+/* 1. Glassmorphism Navbar */
+.navbar {
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.nav-link.active-link::after {
+body.dark-mode .navbar {
+  background: rgba(15, 23, 42, 0.85) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* 2. Scroll Reveal Animation Classes */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* 3. Cool Glowing Hover Effect for Project Cards */
+.project-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(99, 102, 241, 0.1);
+}
+
+body.dark-mode .project-card {
+  border: 1px solid rgba(129, 140, 248, 0.1);
+}
+
+.project-card::before {
   content: '';
   position: absolute;
-  bottom: -5px;
-  left: 0;
+  top: 0;
+  left: -100%;
   width: 100%;
-  height: 2px;
-  background: var(--primary);
-  border-radius: 2px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
 }
 
-body.dark-mode .nav-link.active-link {
-  color: #818cf8 !important;
+.project-card:hover::before {
+  left: 100%;
 }
 
-body.dark-mode .nav-link.active-link::after {
-  background: #818cf8;
+body.dark-mode .project-card:hover {
+  box-shadow: 0 0 25px rgba(129, 140, 248, 0.15);
+  border-color: rgba(129, 140, 248, 0.3);
 }
 
-/* 2. Typing Cursor Animation */
-.typing-cursor {
-  display: inline-block;
-  width: 3px;
-  background-color: var(--primary);
-  animation: blink 1s infinite;
-  margin-left: 2px;
-  vertical-align: baseline;
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-/* 3. Scroll to Top Button */
-.scroll-to-top {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 50px;
-  height: 50px;
-  background: var(--primary);
-  color: white;
-  border: none;
+/* 4. Animated Gradient Border for Profile Image */
+.profile-img-wrapper {
+  position: relative;
+  padding: 4px;
   border-radius: 50%;
-  font-size: 1.2rem;
-  cursor: pointer;
-  box-shadow: var(--shadow-lg);
-  transition: var(--transition);
-  z-index: 999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: linear-gradient(45deg, var(--primary), var(--secondary), var(--primary));
+  background-size: 200% 200%;
+  animation: gradient-rotate 3s ease infinite;
 }
 
-.scroll-to-top:hover {
-  background: var(--primary-dark);
-  transform: translateY(-5px);
+@keyframes gradient-rotate {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-/* 4. Contact Form Input Focus States */
-input:focus, textarea:focus {
+.profile-img-wrapper .profile-img {
+  border: 4px solid var(--light) !important;
+  position: relative;
+  z-index: 2;
+}
+
+body.dark-mode .profile-img-wrapper .profile-img {
+  border: 4px solid #0f172a !important;
+}
+
+/* 5. Floating Animation for Hero Image */
+.hero-image {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+/* 6. Modern Input Styling for Contact Form */
+.contact-input {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background: var(--card-bg);
+  color: var(--dark);
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.contact-input:focus {
   outline: none;
-  border-color: var(--primary) !important;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+  transform: translateY(-2px);
+}
+
+body.dark-mode .contact-input {
+  background: #1e293b;
+  color: #f8fafc;
 }
