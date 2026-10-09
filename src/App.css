@@ -107,6 +107,7 @@ body.dark-mode .nav-toggle {
   display: flex;
   list-style: none;
   gap: 30px;
+  align-items: center;
 }
 
 .nav-link {
@@ -114,6 +115,7 @@ body.dark-mode .nav-toggle {
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease;
+  cursor: pointer;
 }
 
 .nav-link:hover {
@@ -254,6 +256,7 @@ body.dark-mode .hero-description {
   font-weight: 600;
   box-shadow: var(--shadow);
   transition: var(--transition);
+  cursor: pointer;
 }
 
 .btn:hover {
@@ -597,4 +600,82 @@ body.dark-mode .footer {
   .contact-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* ========================================= */
+/* ===== NEW FEATURE STYLES (ADDED) ===== */
+/* ========================================= */
+
+/* 1. Active Nav Link Highlight */
+.nav-link.active-link {
+  color: var(--primary) !important;
+  font-weight: 700 !important;
+  position: relative;
+}
+
+.nav-link.active-link::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+body.dark-mode .nav-link.active-link {
+  color: #818cf8 !important;
+}
+
+body.dark-mode .nav-link.active-link::after {
+  background: #818cf8;
+}
+
+/* 2. Typing Cursor Animation */
+.typing-cursor {
+  display: inline-block;
+  width: 3px;
+  background-color: var(--primary);
+  animation: blink 1s infinite;
+  margin-left: 2px;
+  vertical-align: baseline;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* 3. Scroll to Top Button */
+.scroll-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+  transition: var(--transition);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scroll-to-top:hover {
+  background: var(--primary-dark);
+  transform: translateY(-5px);
+}
+
+/* 4. Contact Form Input Focus States */
+input:focus, textarea:focus {
+  outline: none;
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
 }
