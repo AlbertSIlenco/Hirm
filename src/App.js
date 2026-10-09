@@ -5,12 +5,63 @@ import './App.css';
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  
+  // Typing effect state
+  const roles = ["Full-Stack Developer", "Laravel Expert", "UI/UX Enthusiast", "Problem Solver"];
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [typedText, setTypedText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
 
-  // Load dark mode from localStorage
+  // 1. Load dark mode from localStorage
   useEffect(() => {
     const savedMode = localStorage.getItem('darkMode') === 'true';
     setIsDarkMode(savedMode);
     if (savedMode) document.body.classList.add('dark-mode');
+  }, []);
+
+  // 2. Typing Effect Logic
+  useEffect(() => {
+    const currentRole = roles[roleIndex];
+    const typingSpeed = isDeleting ? 50 : 100;
+
+    const timer = setTimeout(() => {
+      if (!isDeleting && typedText === currentRole) {
+        setTimeout(() => setIsDeleting(true), 1500); // Pause at end
+      } else if (isDeleting && typedText === "") {
+        setIsDeleting(false);
+        setRoleIndex((prev) => (prev + 1) % roles.length);
+      } else {
+        setTypedText(isDeleting ? currentRole.substring(0, typedText.length - 1) : currentRole.substring(0, typedText.length + 1));
+      }
+    }, typingSpeed);
+
+    return () => clearTimeout(timer);
+  }, [typedText, isDeleting, roleIndex]);
+
+  // 3. Scroll Listener for Active Section & Scroll-to-Top Button
+  useEffect(() => {
+    const handleScroll = () => {
+      // Show/hide scroll-to-top button
+      setShowScrollTop(window.scrollY > 400);
+
+      // Determine active section
+      const sections = ['home', 'about', 'skills', 'projects', 'contact'];
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= 150 && rect.bottom >= 150) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const toggleDarkMode = () => {
@@ -25,301 +76,189 @@ function App() {
     }
   };
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setIsMenuOpen(false); // Close mobile menu on click
+    }
   };
 
-  const closeMenu = () => {
-    setIsMenuOpen(false);
+  // Mock form submission
+  const handleContactSubmit = (e) => {
+    e.preventDefault();
+    alert("Thank you for your message! I will get back to you soon.");
+    e.target.reset();
   };
+
+  // Data Arrays (Easy to update!)
+  const skills = ["Laravel", "PHP", "JavaScript", "Vue.js", "React", "MySQL", "HTML/CSS", "Git", "Bootstrap", "Tailwind"];
+  
+  const projects = [
+    { title: "E-Commerce Platform", desc: "A full-featured online store with cart, checkout, and admin dashboard.", tags: ["Laravel", "MySQL", "Stripe"] },
+    { title: "Task Management App", desc: "Real-time collaborative task board with drag-and-drop functionality.", tags: ["Vue.js", "Laravel API", "Tailwind"] },
+    { title: "Hospital Management", desc: "Patient records, appointment scheduling, and billing system.", tags: ["PHP", "Livewire", "Bootstrap"] }
+  ];
 
   return (
-    <div className="App">
+    <div className={`app ${isDarkMode ? 'dark-mode' : ''}`}>
       {/* ===== Navbar ===== */}
       <nav className="navbar">
         <div className="nav-container">
           <div className="nav-logo">
-            <h2>Albert</h2>
+            <h2>Albert<span style={{color: 'var(--secondary)'}}>.</span></h2>
           </div>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-            {/* Dark Mode Toggle */}
-            <button
-              onClick={toggleDarkMode}
-              style={{
-                background: 'none',
-                border: '2px solid #6366f1',
-                borderRadius: '50%',
-                width: '40px',
-                height: '40px',
-                fontSize: '1.2rem',
-                color: isDarkMode ? '#818cf8' : '#6366f1',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
-            >
-              {isDarkMode ? '☀️' : '🌙'}
-            </button>
-
-            <div className="nav-toggle" onClick={toggleMenu}>
-              <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
-            </div>
+          
+          <div className="nav-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
           </div>
 
           <ul className={`nav-menu ${isMenuOpen ? 'nav-active' : ''}`}>
-            <li><a href="#home" onClick={closeMenu} className="nav-link">Home</a></li>
-            <li><a href="#about" onClick={closeMenu} className="nav-link">About</a></li>
-            <li><a href="#skills" onClick={closeMenu} className="nav-link">Skills</a></li>
-            <li><a href="#projects" onClick={closeMenu} className="nav-link">Projects</a></li>
-            <li><a href="#gallery" onClick={closeMenu} className="nav-link">Gallery</a></li>
-            <li><a href="#contact" onClick={closeMenu} className="nav-link">Contact</a></li>
+            {['home', 'about', 'skills', 'projects', 'contact'].map((section) => (
+              <li key={section}>
+                <a 
+                  href={`#${section}`} 
+                  className={`nav-link ${activeSection === section ? 'active-link' : ''}`}
+                  onClick={(e) => { e.preventDefault(); scrollToSection(section); }}
+                >
+                  {section.charAt(0).toUpperCase() + section.slice(1)}
+                </a>
+              </li>
+            ))}
+            <li>
+              <button className="nav-link" onClick={toggleDarkMode} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.2rem' }}>
+                <i className={`fas ${isDarkMode ? 'fa-sun' : 'fa-moon'}`}></i>
+              </button>
+            </li>
           </ul>
         </div>
       </nav>
 
-      {/* ===== Main Content ===== */}
       <main>
         {/* ===== Hero Section ===== */}
         <section id="home" className="hero">
-          <div className="container">
-            <div className="hero-content">
-              <div className="hero-text">
-                <h1>Hello, I'm <span className="text-gradient">Albert</span></h1>
-                <h3 className="subtitle">Building Digital Experiences</h3>
-                <p className="hero-description">
-                  I craft fast, clean, and modern web apps with React, Node.js, Laravel, and creative design tools.
-                </p>
-                <div className="hero-btns">
-                  <a href="#projects" className="btn btn-large">View My Work</a>
-                  <a href="#contact" className="btn btn-outline btn-large">Contact Me</a>
-                </div>
+          <div className="container hero-content">
+            <div className="hero-text">
+              <p className="subtitle">Hello, I'm Albert</p>
+              <h1>I am a <span className="text-gradient">{typedText}</span><span className="typing-cursor">|</span></h1>
+              <p className="hero-description">
+                I build fast, responsive, and beautiful web applications using modern technologies like Laravel, React, and Vue.js. Let's create something amazing together.
+              </p>
+              <div className="hero-btns">
+                <a href="#projects" className="btn btn-large" onClick={(e) => { e.preventDefault(); scrollToSection('projects'); }}>View My Work</a>
+                <a href="#contact" className="btn btn-outline btn-large" onClick={(e) => { e.preventDefault(); scrollToSection('contact'); }}>Contact Me</a>
               </div>
-              <div className="hero-image">
-                <img
-                  src="/images/albert-profile.png"
-                  alt="Albert - Full Stack Developer"
-                  className="profile-img"
-                />
+            </div>
+            <div className="hero-image">
+              {/* Replace with your actual image path */}
+              <img src="/profile2.png" alt="Albert Nzubahimana" className="profile-img" />
+            </div>
+          </div>
+        </section>
+
+        {/* ===== About Section ===== */}
+        <section id="about" className="about">
+          <div className="container">
+            <h2 className="section-title">About Me</h2>
+            <p className="section-subtitle">Get to know the person behind the code.</p>
+            <div className="about-content">
+              <div className="about-text">
+                <p className="about-paragraph">
+                  I'm a passionate web developer from East Africa with over 4 years of experience in building modern, scalable web applications. 
+                </p>
+                <p className="about-paragraph">
+                  I specialize in <strong>Laravel</strong>, <strong>PHP</strong>, <strong>JavaScript</strong>, and <strong>responsive frontend design</strong>. I believe in clean code, user-centered design, and continuous learning. When I'm not coding, I enjoy mentoring students and exploring new technologies.
+                </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* ===== Hidden Sections (Load when nav clicked) ===== */}
-        <div className="page-wrapper">
-          <About />
-          <Skills />
-          <Projects />
-          <Gallery />
-          <Contact />
-        </div>
+        {/* ===== Skills Section ===== */}
+        <section id="skills" className="skills">
+          <div className="container">
+            <h2 className="section-title">My Skills</h2>
+            <p className="section-subtitle">Technologies I work with on a daily basis.</p>
+            <div className="skills-grid">
+              {skills.map((skill, index) => (
+                <span key={index} className="skill-tag">{skill}</span>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ===== Projects Section ===== */}
+        <section id="projects" className="projects">
+          <div className="container">
+            <h2 className="section-title">Featured Projects</h2>
+            <p className="section-subtitle">A selection of my recent work and personal projects.</p>
+            <div className="projects-grid">
+              {projects.map((project, index) => (
+                <div key={index} className="project-card">
+                  <h3 className="project-title">{project.title}</h3>
+                  <p className="project-description">{project.desc}</p>
+                  <div className="project-tags">
+                    {project.tags.map((tag, i) => (
+                      <span key={i} className="tag">{tag}</span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ===== Contact Section ===== */}
+        <section id="contact" className="contact">
+          <div className="container">
+            <h2 className="section-title">Get In Touch</h2>
+            <p className="section-subtitle">Have a project in mind? Let's talk about it.</p>
+            
+            <div className="contact-grid">
+              <div className="contact-card">
+                <i className="fas fa-envelope"></i>
+                <p>albertnzubahimana@gmail.com</p>
+              </div>
+              <div className="contact-card">
+                <i className="fas fa-map-marker-alt"></i>
+                <p>Kigali, Rwanda</p>
+              </div>
+              <div className="contact-card">
+                <i className="fas fa-phone"></i>
+                <p>+250 724 051 404</p>
+              </div>
+            </div>
+
+            <form className="contact-form-container" style={{ maxWidth: '600px', margin: '40px auto 0' }} onSubmit={handleContactSubmit}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', marginBottom: '15px' }}>
+                <input type="text" placeholder="Your Name" required style={{ padding: '12px', borderRadius: '8px', border: '1px solid var(--gray)', background: 'var(--card-bg)', color: 'var(--dark)' }} />
+                <input type="email" placeholder="Your Email" required style={{ padding: '12px', borderRadius: '8px', border: '1px solid var(--gray)', background: 'var(--card-bg)', color: 'var(--dark)' }} />
+              </div>
+              <textarea placeholder="Your Message" rows="5" required style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid var(--gray)', background: 'var(--card-bg)', color: 'var(--dark)', marginBottom: '15px' }}></textarea>
+              <button type="submit" className="btn btn-large" style={{ width: '100%' }}>Send Message</button>
+            </form>
+          </div>
+        </section>
       </main>
 
-      <Footer />
+      {/* ===== Footer ===== */}
+      <footer className="footer">
+        <div className="container">
+          <p>&copy; {new Date().getFullYear()} Albert Nzubahimana. Built with React & Love.</p>
+        </div>
+      </footer>
+
+      {/* ===== Scroll to Top Button ===== */}
+      {showScrollTop && (
+        <button 
+          className="scroll-to-top" 
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        >
+          <i className="fas fa-arrow-up"></i>
+        </button>
+      )}
     </div>
   );
 }
-
-// ===== About Section =====
-const About = () => (
-  <section id="about" className="about">
-    <div className="container">
-      <h2 className="section-title">About Me</h2>
-      <div className="about-content">
-        <div className="about-text">
-          <p className="about-paragraph">
-            Hi, I'm Albert — a passionate full-stack developer with expertise in web development, networking, and digital creativity.
-          </p>
-          <p className="about-paragraph">
-            I’ve studied Computer Systems & Architecture (CSA) and Electronics, and I'm skilled in photo and video editing using Canva and CapCut.
-          </p>
-          <p className="about-paragraph">
-            I love turning ideas into clean, functional, and beautiful digital experiences.
-          </p>
-          <a href="#contact" className="btn">Let's Connect</a>
-        </div>
-        <div className="about-image">
-          <img
-            src="/images/albert-working.png"
-            alt="Albert working"
-            className="about-img"
-          />
-        </div>
-      </div>
-    </div>
-  </section>
-);
-
-// ===== Skills Section =====
-const Skills = () => {
-  const skills = [
-    'HTML/CSS', 'JavaScript', 'React', 'Node.js', 'Laravel', 'PHP',
-    'MySQL', 'Networking', 'CSA', 'Electronics', 'Photo Editing', 'Video Editing', 'Canva', 'CapCut'
-  ];
-
-  return (
-    <section id="skills" className="skills">
-      <div className="container">
-        <h2 className="section-title">My Skills</h2>
-        <div className="skills-grid">
-          {skills.map((skill, i) => (
-            <div key={i} className="skill-tag">{skill}</div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-// ===== Projects Section =====
-const Projects = () => {
-  const projects = [
-    {
-      title: "Personal Portfolio Website",
-      description: "A responsive portfolio built with React and GSAP for smooth animations and modern design.",
-      tags: ["React", "GSAP", "CSS3", "JavaScript"]
-    },
-    {
-      title: "Student Management System",
-      description: "A full-featured web app built with Laravel for managing student records, grades, and attendance with secure login and admin dashboard.",
-      tags: ["Laravel", "PHP", "MySQL", "Bootstrap", "Admin Panel"]
-    },
-    {
-      title: "Network Setup for Small Business",
-      description: "Designed and implemented a secure LAN network for a 15-user office, including router configuration and IP management.",
-      tags: ["Networking", "CSA", "Router Setup", "LAN"]
-    },
-    {
-      title: "Promotional Video Edits",
-      description: "Created engaging promotional videos for local businesses using CapCut and Canva with motion graphics and sound design.",
-      tags: ["CapCut", "Canva", "Video Editing", "Motion Graphics"]
-    },
-    {
-      title: "Digital Photo Editing Service",
-      description: "Provided professional photo retouching, color correction, and social media content design for clients.",
-      tags: ["Photo Editing", "Canva", "Color Grading", "Social Media"]
-    },
-    {
-      title: "IoT Electronics Project",
-      description: "Built a temperature monitoring system using sensors and a Raspberry Pi for real-time data display.",
-      tags: ["Electronics", "CSA", "Raspberry Pi", "Sensor Integration"]
-    },
-    {
-      title: "Website for Local Cafe",
-      description: "Designed and developed a responsive website with menu display and contact form using HTML, CSS, and JavaScript.",
-      tags: ["HTML/CSS", "JavaScript", "Responsive Design", "UI"]
-    }
-  ];
-
-  return (
-    <section id="projects" className="projects">
-      <div className="container">
-        <h2 className="section-title">My Projects</h2>
-        <p className="section-subtitle">
-          Here are some of the real-world projects I've worked on across web development, networking, electronics, and creative design.
-        </p>
-        <div className="projects-grid">
-          {projects.map((project, index) => (
-            <div key={index} className="project-card">
-              <h3 className="project-title">{project.title}</h3>
-              <p className="project-description">{project.description}</p>
-              <div className="project-tags">
-                {project.tags.map((tag, i) => (
-                  <span key={i} className="tag">{tag}</span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-// ===== Gallery Section =====
-const Gallery = () => (
-  <section id="gallery" className="gallery">
-    <div className="container">
-      <h2 className="section-title">My Creative Gallery</h2>
-      <p className="section-subtitle">
-        A collection of my best photo edits, video designs, UI mockups, and digital creations.
-      </p>
-      <div className="gallery-grid">
-        <img src="/images/IMG-20250804-WA0008.jpg" alt="Gallery item 1" className="gallery-item" />
-        <img src="/images/IMG_20250820_155002_854.jpg" alt="Gallery item 2" className="gallery-item" />
-        <img src="/images/IMG_20250820_155002_854~2.jpg" alt="Gallery item 3" className="gallery-item" />
-        <img src="/images/y.jpg" alt="Gallery item 4" className="gallery-item" />
-        <img src="/images/Copy of profile.png" alt="Gallery item 5" className="gallery-item" />
-        <img src="/images/albert-working.png" alt="Gallery item 6" className="gallery-item" />
-      </div>
-    </div>
-  </section>
-);
-
-// ===== Contact Section =====
-const Contact = () => (
-  <section id="contact" className="contact">
-    <div className="container">
-      <h2 className="section-title">Get In Touch</h2>
-      <p className="section-subtitle">
-        I'm always open to discussing new opportunities, collaborations, and creative projects.
-      </p>
-      <div className="contact-grid">
-        <div className="contact-card">
-          <i className="fas fa-envelope"></i>
-          <h4>Email</h4>
-          <p><strong>albertnzubahimana@gmail.com</strong></p>
-        </div>
-        <div className="contact-card">
-          <i className="fas fa-map-marker-alt"></i>
-          <h4>Location</h4>
-          <p><strong>Kigali, Rwanda</strong></p>
-        </div>
-        <div className="contact-card">
-          <i className="fas fa-phone"></i>
-          <h4>Phone</h4>
-          <p><strong>+250 724 051 404</strong><br/><strong>+250 793 120 674</strong></p>
-        </div>
-        <div className="contact-card">
-          <a href="https://wa.me/250724051404" target="_blank" rel="noopener noreferrer">
-            <i className="fab fa-whatsapp"></i>
-            <h4>WhatsApp</h4>
-            <p><strong>Chat with Me</strong></p>
-          </a>
-        </div>
-        <div className="contact-card">
-          <a href="https://youtube.com/@albertsilenco" target="_blank" rel="noopener noreferrer">
-            <i className="fab fa-youtube"></i>
-            <h4>YouTube</h4>
-            <p><strong>@albertsilenco</strong></p>
-          </a>
-        </div>
-        <div className="contact-card">
-          <a href="https://instagram.com/albert_silenco" target="_blank" rel="noopener noreferrer">
-            <i className="fab fa-instagram"></i>
-            <h4>Instagram</h4>
-            <p><strong>@albert_silenco</strong></p>
-          </a>
-        </div>
-      </div>
-      <div className="contact-email">
-        <a href="mailto:albertnzubahimana@gmail.com" className="btn btn-large">
-          Send Email
-        </a>
-      </div>
-    </div>
-  </section>
-);
-
-// ===== Footer =====
-const Footer = () => (
-  <footer className="footer">
-    <div className="container">
-      <p>&copy; 2025 Albert. All rights reserved.</p>
-    </div>
-  </footer>
-);
 
 export default App;
