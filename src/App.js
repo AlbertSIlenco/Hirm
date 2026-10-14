@@ -52,7 +52,7 @@ function App() {
               <button 
                 className="nav-link" 
                 onClick={toggleDarkMode} 
-                style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.2rem' }}
+                style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.2rem', color: 'inherit' }}
               >
                 <i className={`fas ${isDarkMode ? 'fa-sun' : 'fa-moon'}`}></i>
               </button>
@@ -77,7 +77,8 @@ function App() {
               </div>
             </div>
             <div className="hero-image">
-              <img src="/profile2.png" alt="Albert Nzubahimana" className="profile-img" />
+              {/* Make sure your image is in the public/image/ folder */}
+              <img src="/image/profile2.png" alt="Albert Nzubahimana" className="profile-img" />
             </div>
           </div>
         </section>
