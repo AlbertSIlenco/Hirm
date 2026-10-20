@@ -6,11 +6,13 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // Load dark mode from localStorage
+  // Load dark mode from localStorage on initial render
   useEffect(() => {
     const savedMode = localStorage.getItem('darkMode') === 'true';
     setIsDarkMode(savedMode);
-    if (savedMode) document.body.classList.add('dark-mode');
+    if (savedMode) {
+      document.body.classList.add('dark-mode');
+    }
   }, []);
 
   const toggleDarkMode = () => {
@@ -53,6 +55,7 @@ function App() {
                 className="nav-link" 
                 onClick={toggleDarkMode} 
                 style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.2rem', color: 'inherit' }}
+                aria-label="Toggle Dark Mode"
               >
                 <i className={`fas ${isDarkMode ? 'fa-sun' : 'fa-moon'}`}></i>
               </button>
@@ -77,8 +80,8 @@ function App() {
               </div>
             </div>
             <div className="hero-image">
-              {/* Make sure your image is in the public/image/ folder */}
-              <img src="/image/profile2.png" alt="Albert Nzubahimana" className="profile-img" />
+              {/* IMPORTANT: Ensure 'profile2.png' is located directly inside your 'public' folder */}
+              <img src="/profile2.png" alt="Albert Nzubahimana" className="profile-img" />
             </div>
           </div>
         </section>
